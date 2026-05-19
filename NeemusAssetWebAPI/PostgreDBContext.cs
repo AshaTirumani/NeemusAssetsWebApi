@@ -15,6 +15,8 @@ namespace NeemusAssetWebAPI.Data
         // Tables
         public DbSet<LocationMaster> LocationMasters { get; set; }
         public DbSet<Department> Departments{ get; set; }
+        public DbSet<DocumentModel> DocumentModels { get; set; }
+        public DbSet<ServiceTypeModel> ServiceTypeModels { get; set; }
 
 
     }

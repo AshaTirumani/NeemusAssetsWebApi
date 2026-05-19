@@ -20,6 +20,10 @@ builder.Services.AddDbContext<PostgreDBContext>(options =>
 builder.Services.AddDbContext<AssetCommonDBContext>(options =>
     options.UseNpgsql(
         builder.Configuration.GetConnectionString("AssetCommonConnection")));
+
+builder.Services.AddDbContext<AssetSAPDBContext>(options =>
+    options.UseNpgsql(
+        builder.Configuration.GetConnectionString("AssetSAPCommonConnection")));
 // ADD CORS
 builder.Services.AddCors(options =>
 {

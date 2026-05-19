@@ -1,22 +1,18 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-
 namespace NeemusAssetWebAPI.Models
 {
-    [Table("LocationMaster")]
-    public class LocationMaster
+    [Table("AssetClassMaster")]
+    public class AssetClass
     {
         [Key]
-        public int LocationID { get; set; }
+        public int AssetClassID { get; set; }
 
-        public string? Location { get; set; }
+        public string? AssetClassName { get; set; }
 
-        public string? LocationCode { get; set; }
+        public string? Depreciation { get; set; }
 
         public string? Status { get; set; }
-
-        public string? Block { get; set; }
-
         public DateTime? Date { get; set; }
     }
 }

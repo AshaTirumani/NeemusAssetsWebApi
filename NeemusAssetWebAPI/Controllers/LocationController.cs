@@ -40,7 +40,8 @@ namespace NeemusAssetWebAPI.Controllers
                     Location = model.Location,
                     LocationCode = model.LocationCode,
                     Status = "Active",
-                    Block = model.Block
+                    Block = model.Block,
+                    Date = DateTime.Now
                 };
 
                 _context.LocationMasters.Add(obj);
