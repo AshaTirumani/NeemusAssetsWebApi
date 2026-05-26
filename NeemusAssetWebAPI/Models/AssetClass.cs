@@ -13,6 +13,6 @@ namespace NeemusAssetWebAPI.Models
         public string? Depreciation { get; set; }
 
         public string? Status { get; set; }
-        public DateTime? Date { get; set; }
+        public DateTime? CreatedDate { get; set; }
     }
 }

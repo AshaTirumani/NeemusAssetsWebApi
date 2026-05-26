@@ -17,7 +17,9 @@ namespace NeemusAssetWebAPI.Controllers
         [Route("api/DepartmentDetails")]
         public IActionResult GetDepartments()
         {
-            var data = _context.Departments.ToList();
+            var data = _context.Departments
+                      .Where(x => x.DepartmentStatus == "Active")
+                      .ToList();
 
             return Ok(data);
         }

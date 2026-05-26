@@ -11,5 +11,32 @@ namespace NeemusAssetWebAPI
         }
         public DbSet<AssetClass> AssetClasss { get; set; }
         public DbSet<AssetTypeModel> AssetTypeModels { get; set; }
+        public DbSet<AssetModel> AssetModels { get; set; }
+
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<AssetModel>()
+                .Property(x => x.CreationDate)
+                .HasColumnType("timestamp without time zone");
+
+            modelBuilder.Entity<AssetModel>()
+                .Property(x => x.FirstAcquisitionDate)
+                .HasColumnType("timestamp without time zone");
+
+            modelBuilder.Entity<AssetModel>()
+                .Property(x => x.AssetCapitalizationDate)
+                .HasColumnType("timestamp without time zone");
+
+            modelBuilder.Entity<AssetModel>()
+                .Property(x => x.WarrantyDate)
+                .HasColumnType("timestamp without time zone");
+            modelBuilder.Entity<AssetTypeModel>()
+               .Property(x => x.CreatedDate)
+               .HasColumnType("timestamp without time zone");
+            modelBuilder.Entity<AssetClass>()
+               .Property(x => x.CreatedDate)
+               .HasColumnType("timestamp without time zone");
+        }
     }
 }

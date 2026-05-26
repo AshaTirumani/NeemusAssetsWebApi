@@ -19,9 +19,22 @@ namespace NeemusAssetWebAPI.Data
         public DbSet<ServiceTypeModel> ServiceTypeModels { get; set; }
         public DbSet<EmployeeMaster> EmployeeMasters { get; set; }
         public DbSet<AuditMaster> AuditMasters { get; set; }
-        public DbSet<StatusMaster> StatusMaster { get; set; }
+        public DbSet<StatusMaster> StatusMasters { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<LocationMaster>()
+                .Property(x => x.CreatedDate)
+                .HasColumnType("timestamp without time zone");
 
+            modelBuilder.Entity<EmployeeMaster>()
+                .Property(x => x.CreateDate)
+                .HasColumnType("timestamp without time zone");
+            modelBuilder.Entity<DocumentModel>()
+               .Property(x => x.CreatedDate)
+               .HasColumnType("timestamp without time zone");
+        }
+       
 
     }
 }

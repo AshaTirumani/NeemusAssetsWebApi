@@ -6,6 +6,7 @@ using NeemusAssetWebAPI.Models;
 namespace NeemusAssetWebAPI
 {
     public class AssetCommonDBContext: DbContext
+
     {
         public AssetCommonDBContext(DbContextOptions<AssetCommonDBContext> options) : base(options)
         {

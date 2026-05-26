@@ -37,7 +37,7 @@ namespace NeemusAssetWebAPI.Controllers
                     ReportingStaffNo = model.ReportingStaffNo,
                     Email = model.Email,
                     CustodianStatus = model.CustodianStatus,
-                    CreateDate = model.CreateDate,
+                    CreateDate = DateTime.Now,
                     LdapUserId = model.LdapUserId,
                     InternalNumber = model.InternalNumber,
                     LdapPwd = model.LdapPwd

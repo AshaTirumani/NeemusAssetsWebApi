@@ -5,7 +5,7 @@ using NeemusAssetWebAPI.Models;
 
 namespace NeemusAssetWebAPI.Controllers
 {
-    [Route("api/[controller]")]
+    
     [ApiController]
     public class StatusController : ControllerBase
     {
@@ -18,67 +18,153 @@ namespace NeemusAssetWebAPI.Controllers
 
         // GET: api/Status
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<StatusMaster>>> GetStatus()
+        [Route("api/StatusDetails")]
+        public IActionResult GetStatus()
         {
-            return await _context.StatusMaster.ToListAsync();
+            var data = _context.StatusMasters.Where(x => x.Status == "Active").ToList();
+
+            return Ok(data);
         }
-
-        // GET: api/Status/1
-        [HttpGet("{id}")]
-        public async Task<ActionResult<StatusMaster>> GetStatusById(int id)
-        {
-            var status = await _context.StatusMaster.FindAsync(id);
-
-            if (status == null)
-            {
-                return NotFound();
-            }
-
-            return status;
-        }
-
-        // POST: api/Status
+        //Add
         [HttpPost]
-        public async Task<ActionResult<StatusMaster>> InsertStatus(StatusMaster status)
+        [Route("api/InsertStatusDetails")]
+        public IActionResult InsertStatusDetails([FromBody] StatusMaster model)
         {
-            _context.StatusMaster.Add(status);
-            await _context.SaveChangesAsync();
-
-            return Ok(status);
-        }
-
-        // PUT: api/Status/1
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateStatus(int id, StatusMaster status)
-        {
-            if (id != status.StatusID)
+            try
             {
-                return BadRequest();
+                StatusMaster obj = new StatusMaster()
+                {
+                    StatusName = model.StatusName,
+                    StatusCode = model.StatusCode,
+                    Status = "Active"
+                };
+
+                _context.StatusMasters.Add(obj);
+                _context.SaveChanges();
+
+                return Ok(new
+                {
+                    Message = "Status Inserted Successfully",
+                    Data = obj
+                });
             }
-
-            _context.Entry(status).State = EntityState.Modified;
-
-            await _context.SaveChangesAsync();
-
-            return Ok(status);
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
-
-        // DELETE: api/Status/1
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteStatus(int id)
+        // edit
+        [HttpPut]
+        [Route("api/UpdateStatusDetails")]
+        public IActionResult UpdateStatusDetails([FromBody] StatusMaster model)
         {
-            var status = await _context.StatusMaster.FindAsync(id);
+            var data = _context.StatusMasters
+              .FirstOrDefault(x => x.StatusID == model.StatusID);
 
-            if (status == null)
+            if (data == null)
             {
                 return NotFound();
             }
 
-            _context.StatusMaster.Remove(status);
+            data.StatusName = model.StatusName;
+            data.StatusCode = model.StatusCode;
+            data.Status = model.Status;
 
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
+
+            return Ok("Updated Successfully");
+        }
+
+        //delete
+        [HttpDelete]
+        [Route("api/DeleteStatusDetails/{id}")]
+        public IActionResult DeleteStatusDetails(int id)
+        {
+            var data = _context.StatusMasters
+                               .FirstOrDefault(x => x.StatusID == id);
+
+            if (data == null)
+            {
+                return NotFound();
+            }
+
+            data.Status = "InActive";
+
+            _context.SaveChanges();
 
             return Ok("Deleted Successfully");
         }
+
+
+
+
+
+
+
+
+        //public async Task<ActionResult<IEnumerable<StatusMaster>>> GetStatus()
+        //{
+        //    return await _context.StatusMaster.ToListAsync();
+        //}
+
+        // GET: api/Status/1
+        //[HttpGet("{id}")]
+
+        //public async Task<ActionResult<StatusMaster>> GetStatusById(int id)
+        //{
+        //    var status = await _context.StatusMaster.FindAsync(id);
+
+        //    if (status == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    return status;
+        //}
+
+        // POST: api/Status
+        //[HttpPost]
+
+        //public async Task<ActionResult<StatusMaster>> InsertStatus(StatusMaster status)
+        //{
+        //    _context.StatusMaster.Add(status);
+        //    await _context.SaveChangesAsync();
+
+        //    return Ok(status);
+        //}
+
+        //// PUT: api/Status/1
+        //[HttpPut("{id}")]
+        //public async Task<IActionResult> UpdateStatus(int id, StatusMaster status)
+        //{
+        //    if (id != status.StatusID)
+        //    {
+        //        return BadRequest();
+        //    }
+
+        //    _context.Entry(status).State = EntityState.Modified;
+
+        //    await _context.SaveChangesAsync();
+
+        //    return Ok(status);
+        //}
+
+        //// DELETE: api/Status/1
+        //[HttpDelete("{id}")]
+        //public async Task<IActionResult> DeleteStatus(int id)
+        //{
+        //    var status = await _context.StatusMaster.FindAsync(id);
+
+        //    if (status == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    _context.StatusMaster.Remove(status);
+
+        //    await _context.SaveChangesAsync();
+
+        //    return Ok("Deleted Successfully");
+        //}
     }
 }

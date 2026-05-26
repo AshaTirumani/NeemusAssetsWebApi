@@ -17,7 +17,7 @@ namespace NeemusAssetWebAPI.Controllers
         [Route("api/AssetClassDetails")]
         public IActionResult GetAssetClass()
         {
-            var data = _context.AssetClasss.ToList();
+            var data = _context.AssetClasss.Where(x => x.Status == "Active").ToList();
 
             return Ok(data);
         }
@@ -33,7 +33,8 @@ namespace NeemusAssetWebAPI.Controllers
                 {
                     AssetClassName = model.AssetClassName,
                     Depreciation = model.Depreciation,
-                    Status = "Active"
+                    Status = "Active",
+                    CreatedDate = DateTime.Now
                 };
 
                 _context.AssetClasss.Add(obj);

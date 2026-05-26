@@ -6,7 +6,7 @@ namespace NeemusAssetWebAPI.Controllers
 
     [ApiController]
 
-    public class LocationController : Controller
+    public class LocationController : ControllerBase
     {
 
         private readonly PostgreDBContext _context;
@@ -19,7 +19,7 @@ namespace NeemusAssetWebAPI.Controllers
         [Route("api/LocationDetails")]
         public IActionResult GetLocations()
         {
-            var data = _context.LocationMasters.ToList();
+            var data = _context.LocationMasters.Where(x => x.Status == "Active").ToList();
 
             return Ok(data);
         }
@@ -41,7 +41,7 @@ namespace NeemusAssetWebAPI.Controllers
                     LocationCode = model.LocationCode,
                     Status = "Active",
                     Block = model.Block,
-                    Date = DateTime.Now
+                    CreatedDate = DateTime.Now
                 };
 
                 _context.LocationMasters.Add(obj);

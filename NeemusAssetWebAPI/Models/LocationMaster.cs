@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace NeemusAssetWebAPI.Models
 {
@@ -17,6 +18,6 @@ namespace NeemusAssetWebAPI.Models
 
         public string? Block { get; set; }
 
-        public DateTime? Date { get; set; }
+        public DateTime? CreatedDate { get; set; }
     }
 }
