@@ -72,7 +72,7 @@ namespace NeemusAssetWebAPI.Controllers
 
             _context.SaveChanges();
 
-            return Ok("Updated Successfully");
+            return Ok();
         }
 
         //delete
@@ -92,7 +92,7 @@ namespace NeemusAssetWebAPI.Controllers
 
             _context.SaveChanges();
 
-            return Ok("Deleted Successfully");
+            return Ok();
         }
 
     }

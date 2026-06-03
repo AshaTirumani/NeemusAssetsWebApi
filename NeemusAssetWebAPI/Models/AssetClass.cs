@@ -9,6 +9,7 @@ namespace NeemusAssetWebAPI.Models
         public int AssetClassID { get; set; }
 
         public string? AssetClassName { get; set; }
+        public string? AssetClassCode { get; set; }
 
         public string? Depreciation { get; set; }
 

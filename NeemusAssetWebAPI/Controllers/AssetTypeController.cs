@@ -31,6 +31,8 @@ namespace NeemusAssetWebAPI.Controllers
                 {
                     AssetTypeName = model.AssetTypeName,
                     AssetTypeCode = model.AssetTypeCode,
+                    AssetClassName = model.AssetClassName,
+                    AssetClassID = model.AssetClassID,
                     Status = "Active",
                     CreatedDate = DateTime.Now,
                 };
@@ -65,11 +67,13 @@ namespace NeemusAssetWebAPI.Controllers
 
             data.AssetTypeName = model.AssetTypeName;
             data.AssetTypeCode = model.AssetTypeCode;
+            data.AssetClassName = model.AssetClassName;
+            data.AssetClassID = model.AssetClassID;
             data.Status = model.Status;
 
             _context.SaveChanges();
 
-            return Ok("Updated Successfully");
+            return Ok();
         }
         //delete
         [HttpDelete]
@@ -85,7 +89,7 @@ namespace NeemusAssetWebAPI.Controllers
               data.Status = "InActive";
             _context.SaveChanges();
 
-            return Ok("Deleted Successfully");
+            return Ok();
         }
 
     }

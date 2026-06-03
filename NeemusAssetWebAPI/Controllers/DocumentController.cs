@@ -17,8 +17,10 @@ namespace NeemusAssetWebAPI.Controllers
         [Route("api/DocumentDetails")]
         public IActionResult GetDocumentDetails()
         {
-            var data = _context.DocumentModels.ToList();
-
+            //var data = _context.DocumentModels.ToList();
+            var data = _context.DocumentModels
+                      .Where(x => x.Status == "Active")
+                      .ToList();
             return Ok(data);
         }
         //Add
@@ -67,7 +69,7 @@ namespace NeemusAssetWebAPI.Controllers
 
             _context.SaveChanges();
 
-            return Ok("Updated Successfully");
+            return Ok();
         }
 
 
@@ -88,7 +90,7 @@ namespace NeemusAssetWebAPI.Controllers
 
             _context.SaveChanges();
 
-            return Ok("Deleted Successfully");
+            return Ok();
         }
 
 

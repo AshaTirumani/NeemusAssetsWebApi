@@ -9,6 +9,8 @@ namespace NeemusAssetWebAPI.Models
         public int AssetTypeID { get; set; }
         public string? AssetTypeName { get; set; }
         public string? AssetTypeCode { get; set; }
+        public string? AssetClassName { get; set; }
+        public int AssetClassID { get; set; }
         public string? Status { get; set; }
         public DateTime? CreatedDate { get; set; }
     }

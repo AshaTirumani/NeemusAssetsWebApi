@@ -32,6 +32,7 @@ namespace NeemusAssetWebAPI.Controllers
                 AssetClass obj = new AssetClass()
                 {
                     AssetClassName = model.AssetClassName,
+                    AssetClassCode = model.AssetClassCode,
                     Depreciation = model.Depreciation,
                     Status = "Active",
                     CreatedDate = DateTime.Now
@@ -66,12 +67,13 @@ namespace NeemusAssetWebAPI.Controllers
             }
 
             data.AssetClassName = model.AssetClassName;
+            data.AssetClassCode = model.AssetClassCode;
             data.Depreciation = model.Depreciation;
             data.Status = model.Status;
 
             _context.SaveChanges();
 
-            return Ok("Updated Successfully");
+            return Ok();
         }
 
         //delete
@@ -91,7 +93,7 @@ namespace NeemusAssetWebAPI.Controllers
 
             _context.SaveChanges();
 
-            return Ok("Deleted Successfully");
+            return Ok();
         }
 
     }

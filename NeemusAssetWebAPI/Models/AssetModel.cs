@@ -29,6 +29,7 @@ namespace NeemusAssetWebAPI.Models
         public string? Indentor { get; set; }
         public DateTime? WarrantyDate { get; set; }
         public string? Remarks { get; set; }
+        public string? Status { get; set; }
 
         public DateTime? CreationDate { get; set; }
     }

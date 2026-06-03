@@ -13,6 +13,18 @@ namespace NeemusAssetWebAPI.Controllers
             _context = context;
         }
 
+        //Get
+        [HttpGet]
+        [Route("api/AssetDetails")]
+        public IActionResult GetAssetDetails()
+        {
+            var data = _context.AssetModels.Where(x => x.Status == "AVAL").ToList();
+
+            return Ok(data);
+        }
+
+
+
         [HttpPost]
         [Route("api/InsertAsset")]
         public IActionResult InsertAsset([FromBody] AssetModel model)
@@ -70,6 +82,39 @@ namespace NeemusAssetWebAPI.Controllers
             }
         }
 
+        [HttpPost]
+        [Route("api/BulkInsertAsset")]
+        public IActionResult BulkInsertAsset([FromBody] List<AssetModel> models)
+        {
+            try
+            {
+                foreach (var model in models)
+                {
+                    model.FirstAcquisitionDate =
+                    model.FirstAcquisitionDate?.ToLocalTime();
 
+                    model.AssetCapitalizationDate =
+                        model.AssetCapitalizationDate?.ToLocalTime();
+
+                    model.WarrantyDate =
+                        model.WarrantyDate?.ToLocalTime();
+
+                    model.CreationDate = DateTime.Now;
+                    model.Status = "AVAL";
+
+
+                    _context.AssetModels.Add(model);
+                }
+
+                _context.SaveChanges();
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                //return Ok(0);
+                return BadRequest(ex.ToString());
+            }
+        }
     }
 }
