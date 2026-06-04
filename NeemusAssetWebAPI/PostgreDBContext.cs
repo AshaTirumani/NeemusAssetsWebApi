@@ -1,6 +1,7 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
 using NeemusAssetWebAPI.Models;
+using static NeemusAssetWebAPI.Models.CustodianChangeRequestModel;
 
 
 namespace NeemusAssetWebAPI.Data
@@ -20,6 +21,12 @@ namespace NeemusAssetWebAPI.Data
         public DbSet<EmployeeMaster> EmployeeMasters { get; set; }
         public DbSet<AuditMaster> AuditMasters { get; set; }
         public DbSet<StatusMaster> StatusMasters { get; set; }
+
+        public DbSet<EmployeeAssetRequest> EmployeeAssetRequests { get; set; }
+        public DbSet<CustodianChangeRequest> CustodianChangeRequests { get; set; }
+        public DbSet<EmployeeLocationChange> EmployeeLocationChanges{ get; set; }
+        public DbSet<EmployeeAssetBuyback> EmployeeAssetBuybacks { get; set; }
+        public DbSet<EmployeeAssetReturn> EmployeeAssetReturns { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

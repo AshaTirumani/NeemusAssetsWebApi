@@ -13,6 +13,9 @@ namespace NeemusAssetWebAPI
         public DbSet<AssetTypeModel> AssetTypeModels { get; set; }
         public DbSet<AssetModel> AssetModels { get; set; }
 
+        public DbSet<LocationMaster> LocationMasters { get; set; }
+
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
