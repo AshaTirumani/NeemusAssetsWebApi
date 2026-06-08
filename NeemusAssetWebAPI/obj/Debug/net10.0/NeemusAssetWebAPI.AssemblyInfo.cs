@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("NeemusAssetWebAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6b7fbd18eb96a6d2409cc0aeee45364365aa2a86")]
 [assembly: System.Reflection.AssemblyProductAttribute("NeemusAssetWebAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("NeemusAssetWebAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

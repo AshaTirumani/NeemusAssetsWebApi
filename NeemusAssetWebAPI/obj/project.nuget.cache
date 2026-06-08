@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "lnYOEGE+KHQ=",
+  "dgSpecHash": "ybLmthnAroc=",
   "success": true,
-  "projectFilePath": "C:\\AshaTirumani\\NeemusWebApi\\NeemusAssetsWebApi\\NeemusAssetWebAPI\\NeemusAssetWebAPI.csproj",
+  "projectFilePath": "D:\\GitNeemusAsset\\NEEMUSASSET\\ASSETAPI\\NeemusAssetsWebApi\\NeemusAssetWebAPI\\NeemusAssetWebAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Admin\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\microsoft.aspnetcore.openapi\\10.0.7\\microsoft.aspnetcore.openapi.10.0.7.nupkg.sha512",

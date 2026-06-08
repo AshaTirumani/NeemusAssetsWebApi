@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\AshaTirumani\\NeemusWebApi\\NeemusAssetsWebApi\\NeemusAssetWebAPI\\NeemusAssetWebAPI.csproj": {}
+    "D:\\GitNeemusAsset\\NEEMUSASSET\\ASSETAPI\\NeemusAssetsWebApi\\NeemusAssetWebAPI\\NeemusAssetWebAPI.csproj": {}
   },
   "projects": {
-    "C:\\AshaTirumani\\NeemusWebApi\\NeemusAssetsWebApi\\NeemusAssetWebAPI\\NeemusAssetWebAPI.csproj": {
+    "D:\\GitNeemusAsset\\NEEMUSASSET\\ASSETAPI\\NeemusAssetsWebApi\\NeemusAssetWebAPI\\NeemusAssetWebAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\AshaTirumani\\NeemusWebApi\\NeemusAssetsWebApi\\NeemusAssetWebAPI\\NeemusAssetWebAPI.csproj",
+        "projectUniqueName": "D:\\GitNeemusAsset\\NEEMUSASSET\\ASSETAPI\\NeemusAssetsWebApi\\NeemusAssetWebAPI\\NeemusAssetWebAPI.csproj",
         "projectName": "NeemusAssetWebAPI",
-        "projectPath": "C:\\AshaTirumani\\NeemusWebApi\\NeemusAssetsWebApi\\NeemusAssetWebAPI\\NeemusAssetWebAPI.csproj",
+        "projectPath": "D:\\GitNeemusAsset\\NEEMUSASSET\\ASSETAPI\\NeemusAssetsWebApi\\NeemusAssetWebAPI\\NeemusAssetWebAPI.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "C:\\AshaTirumani\\NeemusWebApi\\NeemusAssetsWebApi\\NeemusAssetWebAPI\\obj\\",
+        "outputPath": "D:\\GitNeemusAsset\\NEEMUSASSET\\ASSETAPI\\NeemusAssetsWebApi\\NeemusAssetWebAPI\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -46,7 +46,7 @@
           "auditLevel": "low",
           "auditMode": "all"
         },
-        "SdkAnalysisLevel": "10.0.200"
+        "SdkAnalysisLevel": "10.0.300"
       },
       "frameworks": {
         "net10.0": {
@@ -87,7 +87,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.203/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.300/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.AspNetCore": "(,10.0.32767]",
             "Microsoft.AspNetCore.Antiforgery": "(,10.0.32767]",

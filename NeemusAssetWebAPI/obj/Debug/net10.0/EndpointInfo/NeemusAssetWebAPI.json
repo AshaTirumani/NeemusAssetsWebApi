@@ -13,6 +13,851 @@
     }
   ],
   "paths": {
+    "/api/AssetClassDetails": {
+      "get": {
+        "tags": [
+          "AssetClass"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/InsertAssetClassDetails": {
+      "post": {
+        "tags": [
+          "AssetClass"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssetClass"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssetClass"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssetClass"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/UpdateAssetClassDetails": {
+      "put": {
+        "tags": [
+          "AssetClass"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssetClass"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssetClass"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssetClass"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DeleteAssetClass/{id}": {
+      "delete": {
+        "tags": [
+          "AssetClass"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": [
+                "integer",
+                "string"
+              ],
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/AssetDetails": {
+      "get": {
+        "tags": [
+          "Asset"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/InsertAsset": {
+      "post": {
+        "tags": [
+          "Asset"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssetModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssetModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssetModel"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/BulkInsertAsset": {
+      "post": {
+        "tags": [
+          "Asset"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/AssetModel"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/AssetModel"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/AssetModel"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/AssetRequestDetails": {
+      "get": {
+        "tags": [
+          "AssetRequest"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/AssetRequestDetails/{employeeId}": {
+      "get": {
+        "tags": [
+          "AssetRequest"
+        ],
+        "parameters": [
+          {
+            "name": "employeeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/CreateAssetRequest": {
+      "post": {
+        "tags": [
+          "AssetRequest"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmployeeAssetRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmployeeAssetRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmployeeAssetRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/UpdateAssetRequest": {
+      "put": {
+        "tags": [
+          "AssetRequest"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmployeeAssetRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmployeeAssetRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmployeeAssetRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ApproveAssetRequest": {
+      "put": {
+        "tags": [
+          "AssetRequest"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmployeeAssetRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmployeeAssetRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmployeeAssetRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/RejectAssetRequest": {
+      "put": {
+        "tags": [
+          "AssetRequest"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmployeeAssetRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmployeeAssetRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmployeeAssetRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DeleteAssetRequest/{id}": {
+      "delete": {
+        "tags": [
+          "AssetRequest"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": [
+                "integer",
+                "string"
+              ],
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/AssetReturnDetails": {
+      "get": {
+        "tags": [
+          "AssetReturn"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/CreateAssetReturn": {
+      "post": {
+        "tags": [
+          "AssetReturn"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmployeeAssetReturn"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmployeeAssetReturn"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmployeeAssetReturn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/AssetTypeDetails": {
+      "get": {
+        "tags": [
+          "AssetType"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/InsertAssetTypeDetails": {
+      "post": {
+        "tags": [
+          "AssetType"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssetTypeModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssetTypeModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssetTypeModel"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/UpdateAssetTypeDetails": {
+      "put": {
+        "tags": [
+          "AssetType"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssetTypeModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssetTypeModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssetTypeModel"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DeleteAssetTypeDetails/{id}": {
+      "delete": {
+        "tags": [
+          "AssetType"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": [
+                "integer",
+                "string"
+              ],
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/AuditDetails": {
+      "get": {
+        "tags": [
+          "Audit"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/InsertAudit": {
+      "post": {
+        "tags": [
+          "Audit"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AuditMaster"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AuditMaster"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AuditMaster"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/UpdateAudit": {
+      "put": {
+        "tags": [
+          "Audit"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AuditMaster"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AuditMaster"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AuditMaster"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DeleteAudit/{id}": {
+      "delete": {
+        "tags": [
+          "Audit"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": [
+                "integer",
+                "string"
+              ],
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/BuybackDetails": {
+      "get": {
+        "tags": [
+          "Buyback"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/CreateBuyback": {
+      "post": {
+        "tags": [
+          "Buyback"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmployeeAssetBuyback"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmployeeAssetBuyback"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmployeeAssetBuyback"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/GetCustodianTransferRequests": {
+      "get": {
+        "tags": [
+          "CustodianTransfer"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/GetAssetClasses": {
+      "get": {
+        "tags": [
+          "CustodianTransfer"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/GetAssetTypesByClass/{assetClassID}": {
+      "get": {
+        "tags": [
+          "CustodianTransfer"
+        ],
+        "parameters": [
+          {
+            "name": "assetClassID",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": [
+                "integer",
+                "string"
+              ],
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/InsertCustodianTransfer": {
+      "post": {
+        "tags": [
+          "CustodianTransfer"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustodianChangeRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustodianChangeRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustodianChangeRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DeleteCustodianTransfer/{id}": {
+      "delete": {
+        "tags": [
+          "CustodianTransfer"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": [
+                "integer",
+                "string"
+              ],
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ApproveCustodianTransfer": {
+      "put": {
+        "tags": [
+          "CustodianTransfer"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustodianChangeRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustodianChangeRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustodianChangeRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/RejectCustodianTransfer": {
+      "put": {
+        "tags": [
+          "CustodianTransfer"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustodianChangeRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustodianChangeRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustodianChangeRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/DepartmentDetails": {
       "get": {
         "tags": [
@@ -106,6 +951,217 @@
                 "string"
               ],
               "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DocumentDetails": {
+      "get": {
+        "tags": [
+          "Document"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/InsertDocumentDetails": {
+      "post": {
+        "tags": [
+          "Document"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DocumentModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DocumentModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DocumentModel"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/UpdateDocumentDetails": {
+      "put": {
+        "tags": [
+          "Document"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DocumentModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DocumentModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DocumentModel"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DeleteDocument/{id}": {
+      "delete": {
+        "tags": [
+          "Document"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": [
+                "integer",
+                "string"
+              ],
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/CustodianDetails": {
+      "get": {
+        "tags": [
+          "Employee"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/InsertCustodian": {
+      "post": {
+        "tags": [
+          "Employee"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmployeeMaster"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmployeeMaster"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmployeeMaster"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/UpdateCustodian/{id}": {
+      "put": {
+        "tags": [
+          "Employee"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmployeeMaster"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmployeeMaster"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmployeeMaster"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DeleteCustodian/{id}": {
+      "delete": {
+        "tags": [
+          "Employee"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
             }
           }
         ],
@@ -219,6 +1275,349 @@
         }
       }
     },
+    "/api/LocationTransferDetails": {
+      "get": {
+        "tags": [
+          "LocationTransfer"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/CreateLocationTransfer": {
+      "post": {
+        "tags": [
+          "LocationTransfer"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LocationTransferRequestModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LocationTransferRequestModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LocationTransferRequestModel"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ApproveLocationTransfer": {
+      "put": {
+        "tags": [
+          "LocationTransfer"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmployeeLocationChange"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmployeeLocationChange"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmployeeLocationChange"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/RejectLocationTransfer": {
+      "put": {
+        "tags": [
+          "LocationTransfer"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmployeeLocationChange"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmployeeLocationChange"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmployeeLocationChange"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/TestCustodian": {
+      "get": {
+        "tags": [
+          "Login"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/TestDecrypt": {
+      "get": {
+        "tags": [
+          "Login"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Login": {
+      "post": {
+        "tags": [
+          "Login"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginModel"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ServiceTypeDetails": {
+      "get": {
+        "tags": [
+          "ServiceType"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/InsertServiceTypeDetails": {
+      "post": {
+        "tags": [
+          "ServiceType"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ServiceTypeModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ServiceTypeModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ServiceTypeModel"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/UpdateServiceTypeDetails": {
+      "put": {
+        "tags": [
+          "ServiceType"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ServiceTypeModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ServiceTypeModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ServiceTypeModel"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/StatusDetails": {
+      "get": {
+        "tags": [
+          "Status"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/InsertStatusDetails": {
+      "post": {
+        "tags": [
+          "Status"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StatusMaster"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StatusMaster"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/StatusMaster"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/UpdateStatusDetails": {
+      "put": {
+        "tags": [
+          "Status"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StatusMaster"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StatusMaster"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/StatusMaster"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DeleteStatusDetails/{id}": {
+      "delete": {
+        "tags": [
+          "Status"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": [
+                "integer",
+                "string"
+              ],
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/WeatherForecast": {
       "get": {
         "tags": [
@@ -261,6 +1660,562 @@
   },
   "components": {
     "schemas": {
+      "AssetClass": {
+        "type": "object",
+        "properties": {
+          "assetClassID": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "assetClassName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "assetClassCode": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "depreciation": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "status": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "createdDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          }
+        }
+      },
+      "AssetModel": {
+        "type": "object",
+        "properties": {
+          "slno": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "assetID": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "mainAssetNumber": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "assetSubNumber": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "custodianDepartment": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "assetClass": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "assetType": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "assetDesc": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "serialNumber": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "model": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "make": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "yearofPurchase": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "firstAcquisitionDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "assetCapitalizationDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "unit": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "custodianID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "location": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "cost": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "component": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "grNumber": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "indentor": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "warrantyDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "remarks": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "status": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "creationDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          }
+        }
+      },
+      "AssetTypeModel": {
+        "type": "object",
+        "properties": {
+          "assetTypeID": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "assetTypeName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "assetTypeCode": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "assetClassName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "assetClassID": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "status": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "createdDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          }
+        }
+      },
+      "AuditMaster": {
+        "type": "object",
+        "properties": {
+          "auditID": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "auditDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "auditName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "auditDescription": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "unitNo": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "auditBy": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "status": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "auditStatus": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "locationID": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "null",
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "totalStock": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "null",
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "custodianDepartment": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "custDepartmentCode": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "custDesignation": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "custodianName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "completionDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "adminRemarks": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "CustodianChangeRequest": {
+        "type": "object",
+        "properties": {
+          "custodianChangeID": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "assetID": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "null",
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "employeeID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "custodianComments": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "approverComments": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "date": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "status": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "toCustodian": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "adminComments": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "custodianDepartment": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "custDepartmentCode": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "custDesignation": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "requestBy": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "approverID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "approverName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "approverDesignation": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "approverDeptCode": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "approverDepartment": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "adminID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "adminName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "adminDesignation": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "adminDeptCode": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "adminDepartment": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "requestType": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "requestedChangeCustodian": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "assetClassID": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "null",
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "adminDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "custodianSequence": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "null",
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          }
+        }
+      },
       "Department": {
         "type": "object",
         "properties": {
@@ -286,6 +2241,872 @@
             ]
           },
           "departmentStatus": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "DocumentModel": {
+        "type": "object",
+        "properties": {
+          "documentID": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "documentName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "status": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "createdDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          }
+        }
+      },
+      "EmployeeAssetBuyback": {
+        "type": "object",
+        "properties": {
+          "buybackRequestID": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "assetID": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "null",
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "employeeID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "requestBy": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "status": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "date": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "comments": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "approverComments": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "adminComments": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "custodianDepartment": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "custDepartmentCode": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "custDesignation": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "approverID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "approverName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "approverDesignation": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "approverDeptCode": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "approverDepartment": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "adminID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "adminName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "adminDesignation": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "adminDeptCode": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "adminDepartment": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "requestType": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "assetClassID": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "null",
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "adminDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          }
+        }
+      },
+      "EmployeeAssetRequest": {
+        "type": "object",
+        "properties": {
+          "assetRequestID": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "assetTypeID": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "null",
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "assetClassID": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "null",
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "locationID": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "null",
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "requestSequene": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "null",
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "requestBy": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "employeeID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "quantity": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "status": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "date": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "mainAssetNumber": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "approvedQuantity": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "comments": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "assetTypeCode": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "approverComments": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "adminComments": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "custodianDepartment": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "custDepartmentCode": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "custDesignation": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "approverID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "approverName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "approverDesignation": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "approverDeptCode": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "approverDepartment": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "adminID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "adminName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "adminDesignation": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "adminDeptCode": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "adminDepartment": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "requestType": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "location": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "adminDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          }
+        }
+      },
+      "EmployeeAssetReturn": {
+        "type": "object",
+        "properties": {
+          "assetReturnID": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "assetID": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "null",
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "employeeID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "toLocation": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "toCustodian": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "custodianComments": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "approverComments": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "adminComments": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "date": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "status": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "custodianDepartment": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "custDepartmentCode": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "custDesignation": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "requestBy": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "approverID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "approverName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "approverDesignation": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "approverDeptCode": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "approverDepartment": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "adminID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "adminName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "adminDesignation": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "adminDeptCode": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "adminDepartment": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "requestType": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "assetClassID": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "null",
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "adminDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "returnSequene": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "null",
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          }
+        }
+      },
+      "EmployeeLocationChange": {
+        "type": "object",
+        "properties": {
+          "locationChangeID": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "assetID": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "null",
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "employeeID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "status": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "date": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "custodianComments": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "approverComments": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "toLocation": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "adminComments": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "custodianDepartment": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "custDepartmentCode": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "custDesignation": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "requestBy": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "approverID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "approverName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "approverDesignation": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "approverDeptCode": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "approverDepartment": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "adminID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "adminName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "adminDesignation": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "adminDeptCode": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "adminDepartment": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "requestType": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "assetClassID": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "null",
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "adminDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "locationID": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "null",
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "fromLocation": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "fromBlock": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "locationSequence": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "null",
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          }
+        }
+      },
+      "EmployeeMaster": {
+        "type": "object",
+        "properties": {
+          "custodianID": {
+            "type": "string"
+          },
+          "custodianDepartmentCode": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "custodianName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "designation": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "reportingStaffNo": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "email": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "custodianStatus": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "createDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "ldapUserId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "internalNumber": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "ldapPwd": {
             "type": [
               "null",
               "string"
@@ -323,6 +3144,170 @@
             ]
           },
           "block": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "createdDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          }
+        }
+      },
+      "LocationTransferRequestModel": {
+        "type": "object",
+        "properties": {
+          "assetID": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "assetClassID": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "locationID": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "toLocation": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "custodianComments": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "employeeID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "requestBy": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "custodianDepartment": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "custDesignation": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "approverID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "LoginModel": {
+        "type": "object",
+        "properties": {
+          "userID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "password": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "ServiceTypeModel": {
+        "type": "object",
+        "properties": {
+          "serviceTypeID": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "serviceTypeName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "description": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "status": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "createdDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          }
+        }
+      },
+      "StatusMaster": {
+        "type": "object",
+        "properties": {
+          "statusID": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "statusName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "statusCode": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "status": {
             "type": [
               "null",
               "string"
@@ -365,10 +3350,52 @@
   },
   "tags": [
     {
+      "name": "AssetClass"
+    },
+    {
+      "name": "Asset"
+    },
+    {
+      "name": "AssetRequest"
+    },
+    {
+      "name": "AssetReturn"
+    },
+    {
+      "name": "AssetType"
+    },
+    {
+      "name": "Audit"
+    },
+    {
+      "name": "Buyback"
+    },
+    {
+      "name": "CustodianTransfer"
+    },
+    {
       "name": "Department"
     },
     {
+      "name": "Document"
+    },
+    {
+      "name": "Employee"
+    },
+    {
       "name": "Location"
+    },
+    {
+      "name": "LocationTransfer"
+    },
+    {
+      "name": "Login"
+    },
+    {
+      "name": "ServiceType"
+    },
+    {
+      "name": "Status"
     },
     {
       "name": "WeatherForecast"

@@ -15,6 +15,7 @@ namespace NeemusAssetWebAPI.Controllers
         [HttpGet]
         [Route("api/AssetTypeDetails")]
         public IActionResult GetAssetTypeDetails()
+        
         {
             //var data = _context.AssetTypeModels.ToList();
             var data = _context.AssetTypeModels.Where(x => x.Status == "Active").ToList();

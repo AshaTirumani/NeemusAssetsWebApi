@@ -1,8 +1,344 @@
 [
   {
+    "ContainingType": "NeemusAssetWebAPI.Controllers.AssetRequestController",
+    "Method": "ApproveAssetRequest",
+    "RelativePath": "api/ApproveAssetRequest",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "NeemusAssetWebAPI.Models.EmployeeAssetRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NeemusAssetWebAPI.Controllers.CustodianTransferController",
+    "Method": "ApproveCustodianTransfer",
+    "RelativePath": "api/ApproveCustodianTransfer",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "NeemusAssetWebAPI.Models.CustodianChangeRequestModel\u002BCustodianChangeRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NeemusAssetWebAPI.Controllers.LocationTransferController",
+    "Method": "ApproveLocationTransfer",
+    "RelativePath": "api/ApproveLocationTransfer",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "NeemusAssetWebAPI.Models.EmployeeLocationChange",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NeemusAssetWebAPI.Controllers.AssetClassController",
+    "Method": "GetAssetClass",
+    "RelativePath": "api/AssetClassDetails",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NeemusAssetWebAPI.Controllers.AssetController",
+    "Method": "GetAssetDetails",
+    "RelativePath": "api/AssetDetails",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NeemusAssetWebAPI.Controllers.AssetRequestController",
+    "Method": "GetAssetRequests",
+    "RelativePath": "api/AssetRequestDetails",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NeemusAssetWebAPI.Controllers.AssetRequestController",
+    "Method": "GetAssetRequestsByEmployee",
+    "RelativePath": "api/AssetRequestDetails/{employeeId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "employeeId",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NeemusAssetWebAPI.Controllers.AssetReturnController",
+    "Method": "GetAssetReturnDetails",
+    "RelativePath": "api/AssetReturnDetails",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NeemusAssetWebAPI.Controllers.AssetTypeController",
+    "Method": "GetAssetTypeDetails",
+    "RelativePath": "api/AssetTypeDetails",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NeemusAssetWebAPI.Controllers.AuditController",
+    "Method": "GetAudits",
+    "RelativePath": "api/AuditDetails",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NeemusAssetWebAPI.Controllers.AssetController",
+    "Method": "BulkInsertAsset",
+    "RelativePath": "api/BulkInsertAsset",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "models",
+        "Type": "System.Collections.Generic.List\u00601[[NeemusAssetWebAPI.Models.AssetModel, NeemusAssetWebAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NeemusAssetWebAPI.Controllers.BuybackController",
+    "Method": "GetBuybackDetails",
+    "RelativePath": "api/BuybackDetails",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NeemusAssetWebAPI.Controllers.AssetRequestController",
+    "Method": "CreateAssetRequest",
+    "RelativePath": "api/CreateAssetRequest",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "NeemusAssetWebAPI.Models.EmployeeAssetRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NeemusAssetWebAPI.Controllers.AssetReturnController",
+    "Method": "CreateAssetReturn",
+    "RelativePath": "api/CreateAssetReturn",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "NeemusAssetWebAPI.Models.EmployeeAssetReturn",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NeemusAssetWebAPI.Controllers.BuybackController",
+    "Method": "CreateBuyback",
+    "RelativePath": "api/CreateBuyback",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "NeemusAssetWebAPI.Models.EmployeeAssetBuyback",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NeemusAssetWebAPI.Controllers.LocationTransferController",
+    "Method": "CreateLocationTransfer",
+    "RelativePath": "api/CreateLocationTransfer",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "NeemusAssetWebAPI.Models.LocationTransferRequestModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NeemusAssetWebAPI.Controllers.EmployeeController",
+    "Method": "GetCustodians",
+    "RelativePath": "api/CustodianDetails",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NeemusAssetWebAPI.Controllers.AssetClassController",
+    "Method": "DeleteAssetClass",
+    "RelativePath": "api/DeleteAssetClass/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NeemusAssetWebAPI.Controllers.AssetRequestController",
+    "Method": "DeleteAssetRequest",
+    "RelativePath": "api/DeleteAssetRequest/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NeemusAssetWebAPI.Controllers.AssetTypeController",
+    "Method": "DeleteAssetTypeDetails",
+    "RelativePath": "api/DeleteAssetTypeDetails/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NeemusAssetWebAPI.Controllers.AuditController",
+    "Method": "DeleteAudit",
+    "RelativePath": "api/DeleteAudit/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NeemusAssetWebAPI.Controllers.EmployeeController",
+    "Method": "DeleteCustodian",
+    "RelativePath": "api/DeleteCustodian/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NeemusAssetWebAPI.Controllers.CustodianTransferController",
+    "Method": "DeleteCustodianTransfer",
+    "RelativePath": "api/DeleteCustodianTransfer/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "NeemusAssetWebAPI.Controllers.DepartmentController",
     "Method": "DeleteDepartment",
     "RelativePath": "api/DeleteDepartment/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NeemusAssetWebAPI.Controllers.DocumentController",
+    "Method": "DeleteDocument",
+    "RelativePath": "api/DeleteDocument/{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -32,6 +368,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "NeemusAssetWebAPI.Controllers.StatusController",
+    "Method": "DeleteStatusDetails",
+    "RelativePath": "api/DeleteStatusDetails/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "NeemusAssetWebAPI.Controllers.DepartmentController",
     "Method": "GetDepartments",
     "RelativePath": "api/DepartmentDetails",
@@ -39,6 +391,148 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NeemusAssetWebAPI.Controllers.DocumentController",
+    "Method": "GetDocumentDetails",
+    "RelativePath": "api/DocumentDetails",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NeemusAssetWebAPI.Controllers.CustodianTransferController",
+    "Method": "GetAssetClasses",
+    "RelativePath": "api/GetAssetClasses",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NeemusAssetWebAPI.Controllers.CustodianTransferController",
+    "Method": "GetAssetTypesByClass",
+    "RelativePath": "api/GetAssetTypesByClass/{assetClassID}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "assetClassID",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NeemusAssetWebAPI.Controllers.CustodianTransferController",
+    "Method": "GetCustodianTransferRequests",
+    "RelativePath": "api/GetCustodianTransferRequests",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NeemusAssetWebAPI.Controllers.AssetController",
+    "Method": "InsertAsset",
+    "RelativePath": "api/InsertAsset",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "NeemusAssetWebAPI.Models.AssetModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NeemusAssetWebAPI.Controllers.AssetClassController",
+    "Method": "InsertAssetClassDetails",
+    "RelativePath": "api/InsertAssetClassDetails",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "NeemusAssetWebAPI.Models.AssetClass",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NeemusAssetWebAPI.Controllers.AssetTypeController",
+    "Method": "InsertAssetTypeDetails",
+    "RelativePath": "api/InsertAssetTypeDetails",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "NeemusAssetWebAPI.Models.AssetTypeModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NeemusAssetWebAPI.Controllers.AuditController",
+    "Method": "InsertAudit",
+    "RelativePath": "api/InsertAudit",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "NeemusAssetWebAPI.Models.AuditMaster",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NeemusAssetWebAPI.Controllers.EmployeeController",
+    "Method": "InsertCustodian",
+    "RelativePath": "api/InsertCustodian",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "NeemusAssetWebAPI.Models.EmployeeMaster",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NeemusAssetWebAPI.Controllers.CustodianTransferController",
+    "Method": "InsertCustodianTransfer",
+    "RelativePath": "api/InsertCustodianTransfer",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "NeemusAssetWebAPI.Models.CustodianChangeRequestModel\u002BCustodianChangeRequest",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": []
   },
   {
@@ -52,6 +546,22 @@
       {
         "Name": "model",
         "Type": "NeemusAssetWebAPI.Models.Department",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NeemusAssetWebAPI.Controllers.DocumentController",
+    "Method": "InsertDocumentDetails",
+    "RelativePath": "api/InsertDocumentDetails",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "NeemusAssetWebAPI.Models.DocumentModel",
         "IsRequired": true
       }
     ],
@@ -74,6 +584,38 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "NeemusAssetWebAPI.Controllers.ServiceTypeController",
+    "Method": "InsertServiceTypeDetails",
+    "RelativePath": "api/InsertServiceTypeDetails",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "NeemusAssetWebAPI.Models.ServiceTypeModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NeemusAssetWebAPI.Controllers.StatusController",
+    "Method": "InsertStatusDetails",
+    "RelativePath": "api/InsertStatusDetails",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "NeemusAssetWebAPI.Models.StatusMaster",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "NeemusAssetWebAPI.Controllers.LocationController",
     "Method": "GetLocations",
     "RelativePath": "api/LocationDetails",
@@ -81,6 +623,205 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NeemusAssetWebAPI.Controllers.LocationTransferController",
+    "Method": "GetLocationTransfers",
+    "RelativePath": "api/LocationTransferDetails",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NeemusAssetWebAPI.Controllers.LoginController",
+    "Method": "Login",
+    "RelativePath": "api/Login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "NeemusAssetWebAPI.Models.LoginModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NeemusAssetWebAPI.Controllers.AssetRequestController",
+    "Method": "RejectAssetRequest",
+    "RelativePath": "api/RejectAssetRequest",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "NeemusAssetWebAPI.Models.EmployeeAssetRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NeemusAssetWebAPI.Controllers.CustodianTransferController",
+    "Method": "RejectCustodianTransfer",
+    "RelativePath": "api/RejectCustodianTransfer",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "NeemusAssetWebAPI.Models.CustodianChangeRequestModel\u002BCustodianChangeRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NeemusAssetWebAPI.Controllers.LocationTransferController",
+    "Method": "RejectLocationTransfer",
+    "RelativePath": "api/RejectLocationTransfer",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "NeemusAssetWebAPI.Models.EmployeeLocationChange",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NeemusAssetWebAPI.Controllers.ServiceTypeController",
+    "Method": "GetServiceTypeDetails",
+    "RelativePath": "api/ServiceTypeDetails",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NeemusAssetWebAPI.Controllers.StatusController",
+    "Method": "GetStatus",
+    "RelativePath": "api/StatusDetails",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NeemusAssetWebAPI.Controllers.LoginController",
+    "Method": "TestCustodian",
+    "RelativePath": "api/TestCustodian",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NeemusAssetWebAPI.Controllers.LoginController",
+    "Method": "TestDecrypt",
+    "RelativePath": "api/TestDecrypt",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NeemusAssetWebAPI.Controllers.AssetClassController",
+    "Method": "UpdateAssetClassDetails",
+    "RelativePath": "api/UpdateAssetClassDetails",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "NeemusAssetWebAPI.Models.AssetClass",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NeemusAssetWebAPI.Controllers.AssetRequestController",
+    "Method": "UpdateAssetRequest",
+    "RelativePath": "api/UpdateAssetRequest",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "NeemusAssetWebAPI.Models.EmployeeAssetRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NeemusAssetWebAPI.Controllers.AssetTypeController",
+    "Method": "UpdateAssetTypeDetails",
+    "RelativePath": "api/UpdateAssetTypeDetails",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "NeemusAssetWebAPI.Models.AssetTypeModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NeemusAssetWebAPI.Controllers.AuditController",
+    "Method": "UpdateAudit",
+    "RelativePath": "api/UpdateAudit",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "NeemusAssetWebAPI.Models.AuditMaster",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NeemusAssetWebAPI.Controllers.EmployeeController",
+    "Method": "UpdateCustodian",
+    "RelativePath": "api/UpdateCustodian/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "model",
+        "Type": "NeemusAssetWebAPI.Models.EmployeeMaster",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": []
   },
   {
@@ -100,6 +841,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "NeemusAssetWebAPI.Controllers.DocumentController",
+    "Method": "UpdateDocumentDetails",
+    "RelativePath": "api/UpdateDocumentDetails",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "NeemusAssetWebAPI.Models.DocumentModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "NeemusAssetWebAPI.Controllers.LocationController",
     "Method": "UpdateLocation",
     "RelativePath": "api/UpdateLocation",
@@ -110,6 +867,38 @@
       {
         "Name": "model",
         "Type": "NeemusAssetWebAPI.Models.LocationMaster",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NeemusAssetWebAPI.Controllers.ServiceTypeController",
+    "Method": "UpdateServiceTypeDetails",
+    "RelativePath": "api/UpdateServiceTypeDetails",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "NeemusAssetWebAPI.Models.ServiceTypeModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NeemusAssetWebAPI.Controllers.StatusController",
+    "Method": "UpdateStatusDetails",
+    "RelativePath": "api/UpdateStatusDetails",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "NeemusAssetWebAPI.Models.StatusMaster",
         "IsRequired": true
       }
     ],
