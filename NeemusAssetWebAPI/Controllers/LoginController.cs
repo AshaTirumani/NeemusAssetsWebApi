@@ -87,9 +87,10 @@ namespace NeemusAssetWebAPI.Controllers
                 _context.EmployeeMasters
                 .FirstOrDefault(x =>
                     x.LdapUserId == model.UserID &&
-                    x.LdapPwd == encryptedPassword);
+                    x.LdapPwd == encryptedPassword &&
+        x.CustodianStatus == "Active");
 
-        
+
             if (user == null)
             {
                 return BadRequest(
@@ -102,7 +103,90 @@ namespace NeemusAssetWebAPI.Controllers
                 CustodianID = user.CustodianID,
                 UserName = user.CustodianName,
                 Designation = user.Designation,
-                Email = user.Email
+                Email = user.Email,
+                Department = user.CustodianDepartmentCode,
+                PhoneNumber = user.InternalNumber
+            });
+        }
+
+        [HttpPut]
+        [Route("api/ChangePassword")]
+        public IActionResult ChangePassword(
+        [FromBody] ChangePasswordModel model)
+        {
+            string oldEncrypted =
+                _clsGlobal.EncryptAES(
+                    model.OldPassword
+                );
+
+            string newEncrypted =
+                _clsGlobal.EncryptAES(
+                    model.NewPassword
+                );
+
+            Console.WriteLine(
+                "CustodianID : " +
+                model.CustodianID
+            );
+
+            Console.WriteLine(
+                "Old Password : " +
+                model.OldPassword
+            );
+
+            Console.WriteLine(
+                "Old Encrypted : " +
+                oldEncrypted
+            );
+
+            var dbUser =
+                _context.EmployeeMasters
+                .FirstOrDefault(x =>
+                    x.CustodianID ==
+                    model.CustodianID);
+
+            if (dbUser != null)
+            {
+                Console.WriteLine(
+                    "DB Password : " +
+                    dbUser.LdapPwd
+                );
+            }
+            else
+            {
+                Console.WriteLine(
+                    "User Not Found"
+                );
+            }
+
+            var user =
+                _context.EmployeeMasters
+                .FirstOrDefault(x =>
+                    x.CustodianID ==
+                        model.CustodianID &&
+                    x.LdapPwd ==
+                        oldEncrypted &&
+                    x.CustodianStatus ==
+                        "Active");
+
+            if (user == null)
+            {
+                return BadRequest(new
+                {
+                    success = false,
+                    message = "Current Password is Incorrect"
+                });
+            }
+
+            user.LdapPwd =
+                newEncrypted;
+
+            _context.SaveChanges();
+
+            return Ok(new
+            {
+                success = true,
+                message = "Password Changed Successfully"
             });
         }
     }

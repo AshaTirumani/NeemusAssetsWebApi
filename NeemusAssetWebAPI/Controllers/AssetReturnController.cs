@@ -68,7 +68,7 @@ namespace NeemusAssetWebAPI.Controllers
                             model.ApproverID,
 
                         Status =
-                            "Request Sent To Approver",
+                            "Request Sent To Admin",
 
                         RequestType =
                             "Asset Return",
@@ -94,6 +94,79 @@ namespace NeemusAssetWebAPI.Controllers
                     ex.Message
                 );
             }
+        }
+        [HttpPut]
+        [Route("api/AdminApproveAssetReturn")]
+        public IActionResult AdminApproveAssetReturn(
+    [FromBody] EmployeeAssetReturn model)
+        {
+            var data =
+                _context.EmployeeAssetReturns
+                .FirstOrDefault(x =>
+                    x.AssetReturnID ==
+                    model.AssetReturnID);
+
+            if (data == null)
+            {
+                return NotFound();
+            }
+
+            data.AdminID =
+                model.AdminID;
+
+            data.AdminName =
+                model.AdminName;
+
+            data.AdminComments =
+                model.AdminComments;
+
+            data.Status =
+                "Approved By Admin";
+
+            _context.SaveChanges();
+
+            return Ok(new
+            {
+                Message =
+                    "Asset Return Approved Successfully"
+            });
+        }
+
+        [HttpPut]
+        [Route("api/AdminRejectAssetReturn")]
+        public IActionResult AdminRejectAssetReturn(
+            [FromBody] EmployeeAssetReturn model)
+        {
+            var data =
+                _context.EmployeeAssetReturns
+                .FirstOrDefault(x =>
+                    x.AssetReturnID ==
+                    model.AssetReturnID);
+
+            if (data == null)
+            {
+                return NotFound();
+            }
+
+            data.AdminID =
+                model.AdminID;
+
+            data.AdminName =
+                model.AdminName;
+
+            data.AdminComments =
+                model.AdminComments;
+
+            data.Status =
+                "Rejected By Admin";
+
+            _context.SaveChanges();
+
+            return Ok(new
+            {
+                Message =
+                    "Asset Return Rejected Successfully"
+            });
         }
     }
 }

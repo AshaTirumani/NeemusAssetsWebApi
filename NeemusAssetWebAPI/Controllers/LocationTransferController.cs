@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using NeemusAssetWebAPI.Data;
 using NeemusAssetWebAPI.Models;
+using static NeemusAssetWebAPI.Models.CustodianChangeRequestModel;
 
 namespace NeemusAssetWebAPI.Controllers
 {
@@ -89,11 +90,11 @@ namespace NeemusAssetWebAPI.Controllers
                 return BadRequest(ex.InnerException?.Message ?? ex.ToString());
             }
         }
-    
-    [HttpPut]
+
+        [HttpPut]
         [Route("api/ApproveLocationTransfer")]
         public IActionResult ApproveLocationTransfer(
-    [FromBody] EmployeeLocationChange model)
+        [FromBody] EmployeeLocationChange model)
         {
             var data = _context.EmployeeLocationChanges
                                .FirstOrDefault(
@@ -158,6 +159,163 @@ namespace NeemusAssetWebAPI.Controllers
                 Message = "Rejected Successfully"
             });
         }
-    }
+    
+    [HttpPut]
+        [Route("api/AdminApproveLocationTransfer")]
+        public IActionResult AdminApproveLocationTransfer(
+    [FromBody] EmployeeLocationChange model)
+        {
+            var data =
+                _context.EmployeeLocationChanges
+                .FirstOrDefault(x =>
+                    x.LocationChangeID ==
+                    model.LocationChangeID);
 
+            if (data == null)
+            {
+                return NotFound();
+            }
+
+            data.AdminID =
+                model.AdminID;
+
+            data.AdminName =
+                model.AdminName;
+
+            data.AdminComments =
+                model.AdminComments;
+
+            data.AdminDate =
+                DateTime.UtcNow;
+
+            data.Status =
+                "Approved By Admin";
+
+            _context.SaveChanges();
+
+            return Ok(new
+            {
+                Message =
+                    "Location Transfer Approved By Admin"
+            });
+        }
+        [HttpPut]
+        [Route("api/AdminRejectLocationTransfer")]
+        public IActionResult AdminRejectLocationTransfer(
+    [FromBody] EmployeeLocationChange model)
+        {
+            var data =
+                _context.EmployeeLocationChanges
+                .FirstOrDefault(x =>
+                    x.LocationChangeID ==
+                    model.LocationChangeID);
+
+            if (data == null)
+            {
+                return NotFound();
+            }
+
+            data.AdminID =
+                model.AdminID;
+
+            data.AdminName =
+                model.AdminName;
+
+            data.AdminComments =
+                model.AdminComments;
+
+            data.AdminDate =
+                DateTime.UtcNow;
+
+            data.Status =
+                "Rejected By Admin";
+
+            _context.SaveChanges();
+
+            return Ok(new
+            {
+                Message =
+                    "Location Transfer Rejected By Admin"
+            });
+        }
+        [HttpPut]
+        [Route("api/AdminApproveCustodianTransfer")]
+        public IActionResult AdminApproveCustodianTransfer(
+    [FromBody] CustodianChangeRequest model)
+        {
+            var data =
+                _context.CustodianChangeRequests
+                .FirstOrDefault(x =>
+                    x.CustodianChangeID ==
+                    model.CustodianChangeID);
+
+            if (data == null)
+            {
+                return NotFound();
+            }
+
+            data.AdminID =
+                model.AdminID;
+
+            data.AdminName =
+                model.AdminName;
+
+            data.AdminComments =
+                model.AdminComments;
+
+            data.AdminDate =
+                DateTime.UtcNow;
+
+            data.Status =
+                "Approved By Admin";
+
+            _context.SaveChanges();
+
+            return Ok(new
+            {
+                Message =
+                    "Custodian Transfer Approved Successfully"
+            });
+        }
+
+        [HttpPut]
+        [Route("api/AdminRejectCustodianTransfer")]
+        public IActionResult AdminRejectCustodianTransfer(
+            [FromBody] CustodianChangeRequest model)
+        {
+            var data =
+                _context.CustodianChangeRequests
+                .FirstOrDefault(x =>
+                    x.CustodianChangeID ==
+                    model.CustodianChangeID);
+
+            if (data == null)
+            {
+                return NotFound();
+            }
+
+            data.AdminID =
+                model.AdminID;
+
+            data.AdminName =
+                model.AdminName;
+
+            data.AdminComments =
+                model.AdminComments;
+
+            data.AdminDate =
+                DateTime.UtcNow;
+
+            data.Status =
+                "Rejected By Admin";
+
+            _context.SaveChanges();
+
+            return Ok(new
+            {
+                Message =
+                    "Custodian Transfer Rejected Successfully"
+            });
+        }
+    }
     }

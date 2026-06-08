@@ -62,7 +62,7 @@ namespace NeemusAssetWebAPI.Controllers
                             model.ApproverID,
 
                         Status =
-                            "Request Sent To Approver",
+                            "Request Sent To Admin",
 
                         RequestType =
                             "Asset Buyback",
@@ -85,6 +85,79 @@ namespace NeemusAssetWebAPI.Controllers
             {
                 return BadRequest(ex.Message);
             }
+        }
+        [HttpPut]
+        [Route("api/AdminApproveBuyback")]
+        public IActionResult AdminApproveBuyback(
+    [FromBody] EmployeeAssetBuyback model)
+        {
+            var data =
+                _context.EmployeeAssetBuybacks
+                .FirstOrDefault(x =>
+                    x.BuybackRequestID ==
+                    model.BuybackRequestID);
+
+            if (data == null)
+            {
+                return NotFound();
+            }
+
+            data.AdminID =
+                model.AdminID;
+
+            data.AdminName =
+                model.AdminName;
+
+            data.AdminComments =
+                model.AdminComments;
+
+            data.Status =
+                "Approved By Admin";
+
+            _context.SaveChanges();
+
+            return Ok(new
+            {
+                Message =
+                    "Asset Buyback Approved Successfully"
+            });
+        }
+
+        [HttpPut]
+        [Route("api/AdminRejectBuyback")]
+        public IActionResult AdminRejectBuyback(
+            [FromBody] EmployeeAssetBuyback model)
+        {
+            var data =
+                _context.EmployeeAssetBuybacks
+                .FirstOrDefault(x =>
+                    x.BuybackRequestID ==
+                    model.BuybackRequestID);
+
+            if (data == null)
+            {
+                return NotFound();
+            }
+
+            data.AdminID =
+                model.AdminID;
+
+            data.AdminName =
+                model.AdminName;
+
+            data.AdminComments =
+                model.AdminComments;
+
+            data.Status =
+                "Rejected By Admin";
+
+            _context.SaveChanges();
+
+            return Ok(new
+            {
+                Message =
+                    "Asset Buyback Rejected Successfully"
+            });
         }
     }
 }
