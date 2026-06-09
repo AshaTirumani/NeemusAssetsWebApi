@@ -7,6 +7,8 @@ namespace NeemusAssetWebAPI.Models
     public class EmployeeMaster
     {
         [Key]
+        public int pk_id { get; set; }
+
         [Column("CustodianID")]
         public string CustodianID { get; set; } = string.Empty;
 

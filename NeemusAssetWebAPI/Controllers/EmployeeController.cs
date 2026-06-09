@@ -1,24 +1,47 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using NeemusAssetWebAPI.Models;
 using NeemusAssetWebAPI.Data;
-
+using NeemusAssetWebAPI.Helpers;
+using NeemusAssetWebAPI.Models;
+using NeemusAssetWebAPI.Helpers;
 namespace NeemusAssetWebAPI.Controllers
 {
     [ApiController]
     public class EmployeeController : Controller
     {
         private readonly PostgreDBContext _context;
-
+        private readonly ClsGlobal _clsGlobal = new ClsGlobal();
         public EmployeeController(PostgreDBContext context)
         {
             _context = context;
         }
+      
 
         [HttpGet]
         [Route("api/CustodianDetails")]
         public IActionResult GetCustodians()
         {
-            var data = _context.EmployeeMasters.ToList();
+            //var data = _context.EmployeeMasters.ToList();
+            var data = _context.EmployeeMasters
+                      .Where(x => x.CustodianStatus == "Active")
+                      .ToList();
+            ClsGlobal obj = new ClsGlobal();
+
+            foreach (var item in data)
+            {
+                if (!string.IsNullOrEmpty(item.LdapPwd))
+                {
+                    try
+                    {
+                        item.LdapPwd = obj.DecryptAES(item.LdapPwd);
+                    }
+                    catch
+                    {
+                        // Old records stored as plain text
+                        item.LdapPwd = item.LdapPwd;
+                    }
+                }
+            }
+        
             return Ok(data);
         }
 
@@ -36,11 +59,12 @@ namespace NeemusAssetWebAPI.Controllers
                     Designation = model.Designation,
                     ReportingStaffNo = model.ReportingStaffNo,
                     Email = model.Email,
-                    CustodianStatus = model.CustodianStatus,
+                    CustodianStatus = "Active",
                     CreateDate = DateTime.Now,
                     LdapUserId = model.LdapUserId,
                     InternalNumber = model.InternalNumber,
-                    LdapPwd = model.LdapPwd
+                    
+                    LdapPwd = _clsGlobal.EncryptAES(model.LdapPwd ?? "")
                 };
 
                 _context.EmployeeMasters.Add(obj);
@@ -75,11 +99,10 @@ namespace NeemusAssetWebAPI.Controllers
             data.Designation = model.Designation;
             data.ReportingStaffNo = model.ReportingStaffNo;
             data.Email = model.Email;
-            data.CustodianStatus = model.CustodianStatus;
             data.CreateDate = model.CreateDate;
             data.LdapUserId = model.LdapUserId;
             data.InternalNumber = model.InternalNumber;
-            data.LdapPwd = model.LdapPwd;
+            data.LdapPwd = _clsGlobal.EncryptAES(model.LdapPwd ?? "");
 
             _context.SaveChanges();
 
@@ -103,5 +126,8 @@ namespace NeemusAssetWebAPI.Controllers
 
             return Ok();
         }
+
+
+       
     }
 }

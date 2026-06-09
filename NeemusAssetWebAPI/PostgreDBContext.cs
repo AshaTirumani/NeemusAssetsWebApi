@@ -27,6 +27,7 @@ namespace NeemusAssetWebAPI.Data
         public DbSet<EmployeeLocationChange> EmployeeLocationChanges{ get; set; }
         public DbSet<EmployeeAssetBuyback> EmployeeAssetBuybacks { get; set; }
         public DbSet<EmployeeAssetReturn> EmployeeAssetReturns { get; set; }
+        public DbSet<RoleMasterModel> RoleMasterModels { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -40,6 +41,11 @@ namespace NeemusAssetWebAPI.Data
             modelBuilder.Entity<DocumentModel>()
                .Property(x => x.CreatedDate)
                .HasColumnType("timestamp without time zone");
+            modelBuilder.Entity<RoleMasterModel>()
+             .Property(x => x.CREATE_DATE)
+             .HasColumnType("timestamp without time zone");
+            modelBuilder.Entity<RoleMasterModel>()
+               .HasKey(x => x.ROLE_ID);
         }
        
 

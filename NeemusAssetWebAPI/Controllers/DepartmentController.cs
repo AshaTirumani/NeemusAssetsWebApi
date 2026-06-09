@@ -95,5 +95,29 @@ namespace NeemusAssetWebAPI.Controllers
             return Ok();
         }
 
+        [HttpGet]
+        [Route("api/GetCustodiansByDepartmentName/{departmentName}")]
+        public IActionResult GetCustodiansByDepartmentName(string departmentName)
+        {
+            try
+            {
+                var data = (from c in _context.EmployeeMasters
+                            join d in _context.Departments
+                            on c.CustodianDepartmentCode equals d.DepartmentCode
+                            where d.DepartmentName == departmentName
+                            && c.CustodianStatus == "Active"
+                            select c).ToList();
+
+                return Ok(data);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+
+
+
     }
 }
