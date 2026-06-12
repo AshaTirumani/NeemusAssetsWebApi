@@ -28,6 +28,7 @@ namespace NeemusAssetWebAPI.Data
         public DbSet<EmployeeAssetBuyback> EmployeeAssetBuybacks { get; set; }
         public DbSet<EmployeeAssetReturn> EmployeeAssetReturns { get; set; }
         public DbSet<RoleMasterModel> RoleMasterModels { get; set; }
+        public DbSet<AssetParkingModel> AssetParkings { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

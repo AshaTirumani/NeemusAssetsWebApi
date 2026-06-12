@@ -21,6 +21,26 @@ namespace NeemusAssetWebAPI.Controllers
             var data = _context.AssetTypeModels.Where(x => x.Status == "Active").ToList();
             return Ok(data);
         }
+        [HttpGet]
+        [Route("api/GetAssetTypesByClass/{assetClassID}")]
+        public IActionResult GetAssetTypesByClass(
+    int assetClassID)
+        {
+            try
+            {
+                var data = _context.AssetTypeModels
+                    .Where(x =>
+                        x.AssetClassID == assetClassID &&
+                        x.Status == "Active")
+                    .ToList();
+
+                return Ok(data);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
         //Add
         [HttpPost]
         [Route("api/InsertAssetTypeDetails")]

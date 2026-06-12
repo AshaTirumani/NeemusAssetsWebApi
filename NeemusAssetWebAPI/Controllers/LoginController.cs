@@ -105,7 +105,8 @@ namespace NeemusAssetWebAPI.Controllers
                 Designation = user.Designation,
                 Email = user.Email,
                 Department = user.CustodianDepartmentCode,
-                PhoneNumber = user.InternalNumber
+                PhoneNumber = user.InternalNumber,
+                ApproverID = user.ReportingStaffNo
             });
         }
 

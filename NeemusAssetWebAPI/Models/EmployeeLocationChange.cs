@@ -67,5 +67,6 @@ namespace NeemusAssetWebAPI.Models
         public string? FromBlock { get; set; }
 
         public int? LocationSequence { get; set; }
+      
     }
 }

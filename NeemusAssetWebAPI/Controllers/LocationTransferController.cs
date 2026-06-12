@@ -9,11 +9,13 @@ namespace NeemusAssetWebAPI.Controllers
     public class LocationTransferController : ControllerBase
     {
         private readonly PostgreDBContext _context;
-
+        private readonly AssetSAPDBContext _assetContext;
         public LocationTransferController(
-            PostgreDBContext context)
+       PostgreDBContext context,
+       AssetSAPDBContext assetContext)
         {
             _context = context;
+            _assetContext = assetContext;
         }
 
         [HttpGet]
@@ -27,10 +29,47 @@ namespace NeemusAssetWebAPI.Controllers
             return Ok(data);
         }
 
+        //[HttpGet]
+        //[Route("api/GetAssetTypesByClass/{assetClassID}")]
+        //public IActionResult GetAssetTypesByClass(int assetClassID)
+        //{
+        //    var data = _assetContext.AssetTypeModels
+        //        .Where(x => x.AssetClassID == assetClassID)
+        //        .ToList();
+
+        //    return Ok(data);
+        //}
+        // [HttpGet]
+        // [Route("api/LocationTransferDetails")]
+        // public IActionResult GetLocationTransfers()
+        // {
+        //     var data = _context.EmployeeLocationChanges
+        //.OrderByDescending(x => x.LocationChangeID)
+        //.ToList();
+
+        //     return Ok(data);
+        // }
+        // //[HttpGet]
+        // //[Route("api/GetAssetTypesByClass/{assetClassID}")]
+        // //public IActionResult GetAssetTypesByClass(int assetClassID)
+        // //{
+        // //    try
+        // //    {
+        // //        var data = _assetContext.AssetTypeModels
+        // //            .Where(x => x.AssetClassID == assetClassID)
+        // //            .ToList();
+
+        // //        return Ok(data);
+        // //    }
+        // //    catch (Exception ex)
+        // //    {
+        // //        return BadRequest(ex.ToString());
+        // //    }
+        // //}
         [HttpPost]
         [Route("api/CreateLocationTransfer")]
         public IActionResult CreateLocationTransfer(
-            [FromBody] LocationTransferRequestModel model)
+     [FromBody] EmployeeLocationChange model)
         {
             try
             {
@@ -39,14 +78,11 @@ namespace NeemusAssetWebAPI.Controllers
                     {
                         AssetID = model.AssetID,
 
-                        AssetClassID =
-                            model.AssetClassID,
+                        AssetClassID = model.AssetClassID,
 
-                        LocationID =
-                            model.LocationID,
+                        LocationID = model.LocationID,
 
-                        ToLocation =
-                            model.ToLocation,
+                        ToLocation = model.ToLocation,
 
                         CustodianComments =
                             model.CustodianComments,
@@ -72,25 +108,80 @@ namespace NeemusAssetWebAPI.Controllers
                         Status =
                             "Request Sent To Approver",
 
-                        Date = DateTime.UtcNow
+                        Date =
+                            DateTime.UtcNow
                     };
 
                 _context.EmployeeLocationChanges.Add(obj);
 
                 _context.SaveChanges();
 
-                return Ok(new
-                {
-                    Message =
-                        "Location Transfer Request Sent Successfully"
-                });
+                return Ok(
+                    "Location Transfer Request Sent Successfully"
+                );
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.InnerException?.Message ?? ex.ToString());
+                return BadRequest(
+                    ex.InnerException?.Message ?? ex.Message
+                );
             }
         }
+        //[HttpGet]
+        //[Route("api/LocationTransferDetails")]
+        //public IActionResult GetLocationTransfers()
+        //{
+        //    var transfers = _context.EmployeeLocationChanges
+        //        .OrderByDescending(x => x.LocationChangeID)
+        //        .ToList();
 
+        //    var assets = _assetContext.AssetModels.ToList();
+
+        //    // ADD THIS HERE
+        //    foreach (var a in assets)
+        //    {
+        //        Console.WriteLine(
+        //            $"AssetID={a.AssetID} MainAsset={a.MainAssetNumber}"
+        //        );
+        //    }
+
+        //    var data = transfers.Select(x =>
+        //    {
+        //        var asset = assets.FirstOrDefault(
+        //            a => a.AssetID == x.AssetID
+        //        );
+
+        //        return new
+        //        {
+        //            x.LocationChangeID,
+        //            x.AssetID,
+
+        //            MainAssetNumber =
+        //                asset?.MainAssetNumber,
+
+        //            AssetSubNumber =
+        //                asset?.AssetSubNumber,
+
+        //            AssetTypeName =
+        //                asset?.AssetType,
+
+        //            AssetClassName =
+        //                asset?.AssetClass
+        //        };
+        //    }).ToList();
+
+        //    return Ok(data);
+        //}
+        //[HttpGet]
+        //[Route("api/GetAssetsByClass/{assetClass}")]
+        //public IActionResult GetAssetsByClass(string assetClass)
+        //{
+        //    var data = _assetContext.AssetModels
+        //        .Where(x => x.AssetClass == assetClass)
+        //        .ToList();
+
+        //    return Ok(data);
+        //}
         [HttpPut]
         [Route("api/ApproveLocationTransfer")]
         public IActionResult ApproveLocationTransfer(
@@ -315,6 +406,86 @@ namespace NeemusAssetWebAPI.Controllers
             {
                 Message =
                     "Custodian Transfer Rejected Successfully"
+            });
+        }
+        [HttpPut]
+        [Route("api/AdminApproveAssetRequest")]
+        public IActionResult AdminApproveAssetRequest(
+    [FromBody] EmployeeAssetRequest model)
+        {
+            var data =
+                _context.EmployeeAssetRequests
+                .FirstOrDefault(x =>
+                    x.AssetRequestID ==
+                    model.AssetRequestID);
+
+            if (data == null)
+            {
+                return NotFound();
+            }
+
+            data.AdminID =
+                model.AdminID;
+
+            data.AdminName =
+                model.AdminName;
+
+            data.AdminComments =
+                model.AdminComments;
+
+            data.AdminDate =
+                DateTime.UtcNow;
+
+            data.Status =
+                "Approved By Admin";
+
+            _context.SaveChanges();
+
+            return Ok(new
+            {
+                Message =
+                    "Asset Request Approved Successfully"
+            });
+        }
+
+        [HttpPut]
+        [Route("api/AdminRejectAssetRequest")]
+        public IActionResult AdminRejectAssetRequest(
+            [FromBody] EmployeeAssetRequest model)
+        {
+
+            var data =
+                _context.EmployeeAssetRequests
+                .FirstOrDefault(x =>
+                    x.AssetRequestID ==
+                    model.AssetRequestID);
+
+            if (data == null)
+            {
+                return NotFound();
+            }
+
+            data.AdminID =
+                model.AdminID;
+
+            data.AdminName =
+                model.AdminName;
+
+            data.AdminComments =
+                model.AdminComments;
+
+            data.AdminDate =
+                DateTime.UtcNow;
+
+            data.Status =
+                "Rejected By Admin";
+
+            _context.SaveChanges();
+
+            return Ok(new
+            {
+                Message =
+                    "Asset Request Rejected Successfully"
             });
         }
     }
