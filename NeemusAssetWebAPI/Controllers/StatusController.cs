@@ -37,6 +37,7 @@ namespace NeemusAssetWebAPI.Controllers
                     StatusName = model.StatusName,
                     StatusCode = model.StatusCode,
                     Status = "Active"
+
                 };
 
                 _context.StatusMasters.Add(obj);
@@ -72,7 +73,7 @@ namespace NeemusAssetWebAPI.Controllers
 
             _context.SaveChanges();
 
-            return Ok("Updated Successfully");
+            return Ok();
         }
 
         //delete
@@ -92,7 +93,7 @@ namespace NeemusAssetWebAPI.Controllers
 
             _context.SaveChanges();
 
-            return Ok("Deleted Successfully");
+            return Ok();
         }
 
 

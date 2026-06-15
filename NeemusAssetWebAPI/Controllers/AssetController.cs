@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using NeemusAssetWebAPI.Data;
 using NeemusAssetWebAPI.Models;
 namespace NeemusAssetWebAPI.Controllers
@@ -7,10 +8,11 @@ namespace NeemusAssetWebAPI.Controllers
     public class AssetController : Controller
     {
         private readonly AssetSAPDBContext _context;
-
-        public AssetController(AssetSAPDBContext context)
+        private readonly PostgreDBContext _postgreDBContext;
+        public AssetController(AssetSAPDBContext context , PostgreDBContext postgreDBContext)
         {
             _context = context;
+            _postgreDBContext = postgreDBContext;
         }
 
         //Get
@@ -18,7 +20,7 @@ namespace NeemusAssetWebAPI.Controllers
         [Route("api/AssetDetails")]
         public IActionResult GetAssetDetails()
         {
-            var data = _context.AssetModels.Where(x => x.Status == "AVAL").ToList();
+            var data = _context.AssetModels.Where(x => x.Assetstatus == "Active").ToList();
 
             return Ok(data);
         }
@@ -64,6 +66,8 @@ namespace NeemusAssetWebAPI.Controllers
                     //  ? DateTime.SpecifyKind(model.WarrantyDate.Value, DateTimeKind.Utc)
                     //: (DateTime?)null,
                     Remarks=model.Remarks,
+                    Status = model.Status,
+                    Assetstatus = "Active",
                     CreationDate = System.DateTime.Today
                 };
 
@@ -100,7 +104,7 @@ namespace NeemusAssetWebAPI.Controllers
                         model.WarrantyDate?.ToLocalTime();
 
                     model.CreationDate = DateTime.Now;
-                    model.Status = "AVAL";
+                    model.Assetstatus = "Active";
 
 
                     _context.AssetModels.Add(model);
@@ -116,5 +120,58 @@ namespace NeemusAssetWebAPI.Controllers
                 return BadRequest(ex.ToString());
             }
         }
+
+
+        [HttpGet]
+        [Route("api/AssetMasterDetails")]
+        public async Task<IActionResult> AssetMasterDetails()
+        {
+                       
+            var locations = await _postgreDBContext.LocationMasters
+            .ToListAsync();
+            var statuses = await _postgreDBContext.StatusMasters.ToListAsync();
+
+            var data = await (
+                from a in _context.AssetModels
+                join c in _context.AssetClasss
+                    on a.AssetClass equals c.AssetClassID.ToString()
+                select new
+                {
+                    a.AssetID,
+                    a.MainAssetNumber,
+                    a.CustodianDepartment,
+                    a.AssetDesc,
+                    a.Status,
+                    a.FirstAcquisitionDate,
+                    a.AssetCapitalizationDate,
+                    a.Location,
+                    AssetClassName = c.AssetClassName
+                }
+            ).ToListAsync();
+
+            var result = data.Select(a => new
+            {
+                a.AssetID,
+                a.MainAssetNumber,
+                a.CustodianDepartment,
+                a.AssetDesc,
+                StatusName = statuses
+            .FirstOrDefault(s => s.StatusID.ToString() == a.Status)
+            ?.StatusName,
+                a.FirstAcquisitionDate,
+                a.AssetCapitalizationDate,
+                a.AssetClassName,
+                LocationName = locations
+                    .FirstOrDefault(l => l.LocationID.ToString() == a.Location)
+                    ?.Location
+            }).ToList();
+
+            return Ok(result);
+
+
+
+
+        }
+
     }
 }
