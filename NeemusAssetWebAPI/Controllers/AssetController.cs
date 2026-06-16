@@ -122,56 +122,99 @@ namespace NeemusAssetWebAPI.Controllers
         }
 
 
+        //[HttpGet]
+        //[Route("api/AssetMasterDetails")]
+        //public async Task<IActionResult> AssetMasterDetails()
+        //{
+
+        //    var locations = await _postgreDBContext.LocationMasters
+        //    .ToListAsync();
+        //    var statuses = await _postgreDBContext.StatusMasters.ToListAsync();
+
+        //    var data = await (
+        //        from a in _context.AssetModels
+        //        join c in _context.AssetClasss
+        //            on a.AssetClass equals c.AssetClassID.ToString()
+        //        select new
+        //        {
+        //            a.AssetID,
+        //            a.MainAssetNumber,
+        //            a.CustodianDepartment,
+        //            a.AssetDesc,
+        //            a.Status,
+        //            a.FirstAcquisitionDate,
+        //            a.AssetCapitalizationDate,
+        //            a.Location,
+        //            AssetClassName = c.AssetClassName
+        //        }
+        //    ).ToListAsync();
+
+        //    var result = data.Select(a => new
+        //    {
+        //        a.AssetID,
+        //        a.MainAssetNumber,
+        //        a.CustodianDepartment,
+        //        a.AssetDesc,
+        //        StatusName = statuses
+        //    .FirstOrDefault(s => s.StatusID.ToString() == a.Status)
+        //    ?.StatusName,
+        //        a.FirstAcquisitionDate,
+        //        a.AssetCapitalizationDate,
+        //        a.AssetClassName,
+        //        LocationName = locations
+        //            .FirstOrDefault(l => l.LocationID.ToString() == a.Location)
+        //            ?.Location
+        //    }).ToList();
+
+        //    return Ok(result);
+
+
+
+
+        //}
         [HttpGet]
         [Route("api/AssetMasterDetails")]
         public async Task<IActionResult> AssetMasterDetails()
         {
-                       
-            var locations = await _postgreDBContext.LocationMasters
-            .ToListAsync();
-            var statuses = await _postgreDBContext.StatusMasters.ToListAsync();
+            try
+            {
+                var statuses = await _postgreDBContext.StatusMasters.ToListAsync();
 
-            var data = await (
-                from a in _context.AssetModels
-                join c in _context.AssetClasss
-                    on a.AssetClass equals c.AssetClassID.ToString()
-                select new
+                var assets = await (
+                    from a in _context.AssetModels
+                    join c in _context.AssetClasss
+                        on a.AssetClass equals c.AssetClassID.ToString()
+                    select new
+                    {
+                        a.AssetID,
+                        a.MainAssetNumber,
+                        a.CustodianDepartment,
+                        a.AssetDesc,
+                        a.Status,
+                        AssetClassName = c.AssetClassName
+                    }
+                ).ToListAsync();
+
+                var result = assets.Select(a => new
                 {
                     a.AssetID,
                     a.MainAssetNumber,
                     a.CustodianDepartment,
                     a.AssetDesc,
-                    a.Status,
-                    a.FirstAcquisitionDate,
-                    a.AssetCapitalizationDate,
-                    a.Location,
-                    AssetClassName = c.AssetClassName
-                }
-            ).ToListAsync();
 
-            var result = data.Select(a => new
+                    StatusName = statuses
+                        .FirstOrDefault(s => s.StatusID.ToString() == a.Status)
+                        ?.StatusName,
+
+                    a.AssetClassName
+                }).ToList();
+
+                return Ok(result);
+            }
+            catch (Exception ex)
             {
-                a.AssetID,
-                a.MainAssetNumber,
-                a.CustodianDepartment,
-                a.AssetDesc,
-                StatusName = statuses
-            .FirstOrDefault(s => s.StatusID.ToString() == a.Status)
-            ?.StatusName,
-                a.FirstAcquisitionDate,
-                a.AssetCapitalizationDate,
-                a.AssetClassName,
-                LocationName = locations
-                    .FirstOrDefault(l => l.LocationID.ToString() == a.Location)
-                    ?.Location
-            }).ToList();
-
-            return Ok(result);
-
-
-
-
+                return BadRequest(ex.Message);
+            }
         }
-
     }
 }
