@@ -84,12 +84,11 @@ namespace NeemusAssetWebAPI.Controllers
             }
 
             var user =
-                _context.EmployeeMasters
-                .FirstOrDefault(x =>
-                    x.LdapUserId == model.UserID &&
-                    x.LdapPwd == encryptedPassword &&
-        x.CustodianStatus == "Active");
-
+             _context.EmployeeMasters
+             .FirstOrDefault(x =>
+                 x.LdapUserId == model.UserID &&
+                 x.LdapPwd == encryptedPassword &&
+                 x.CustodianStatus == "Active");
 
             if (user == null)
             {
@@ -98,6 +97,18 @@ namespace NeemusAssetWebAPI.Controllers
                 );
             }
 
+            var assignedRole = _context.RoleMasterModels
+            .FirstOrDefault(x =>
+                x.CustodianID == user.CustodianID &&
+                x.ROLE_NAME == model.RoleName &&
+                x.ROLE_STATUS == "Active");
+
+            if (assignedRole == null)
+            {
+                return BadRequest(
+                    "You are not authorized as {model.RoleName}"
+                );
+            }
             return Ok(new
             {
                 CustodianID = user.CustodianID,
@@ -106,7 +117,10 @@ namespace NeemusAssetWebAPI.Controllers
                 Email = user.Email,
                 Department = user.CustodianDepartmentCode,
                 PhoneNumber = user.InternalNumber,
-                ApproverID = user.ReportingStaffNo
+                ApproverID = user.ReportingStaffNo,
+
+                RoleID = assignedRole.ROLE_ID,
+                RoleName = assignedRole.ROLE_NAME
             });
         }
 
