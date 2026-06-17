@@ -29,6 +29,7 @@ namespace NeemusAssetWebAPI.Data
         public DbSet<EmployeeAssetReturn> EmployeeAssetReturns { get; set; }
         public DbSet<RoleMasterModel> RoleMasterModels { get; set; }
         public DbSet<AssetParkingModel> AssetParkings { get; set; }
+        public DbSet<SAPUpdateLogInfoModel> SAPUpdateLogInfos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

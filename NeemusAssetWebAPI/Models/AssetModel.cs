@@ -22,6 +22,8 @@ namespace NeemusAssetWebAPI.Models
         public DateTime? AssetCapitalizationDate { get; set; }
         public string? Unit { get; set; }
         public string? CustodianID { get; set; }
+        public decimal? Latitude { get; set; }
+        public decimal? Longitude { get; set; }
         public string? Location { get; set; }
         public string? Cost { get; set; }
         public string? Component { get; set; }

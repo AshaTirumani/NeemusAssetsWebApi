@@ -12,7 +12,7 @@ namespace NeemusAssetWebAPI
         public DbSet<AssetClass> AssetClasss { get; set; }
         public DbSet<AssetTypeModel> AssetTypeModels { get; set; }
         public DbSet<AssetModel> AssetModels { get; set; }
-
+        public DbSet<SAPUpdateLogInfoModel> SAPUpdateLogInfos { get; set; }
         public DbSet<LocationMaster> LocationMasters { get; set; }
 
 

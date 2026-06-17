@@ -97,17 +97,34 @@ namespace NeemusAssetWebAPI.Controllers
                 );
             }
 
-            var assignedRole = _context.RoleMasterModels
-            .FirstOrDefault(x =>
-                x.CustodianID == user.CustodianID &&
-                x.ROLE_NAME == model.RoleName &&
-                x.ROLE_STATUS == "Active");
+            //var assignedRole = _context.RoleMasterModels
+            //.FirstOrDefault(x =>
+            //    x.CustodianID == user.CustodianID &&
+            //    x.ROLE_NAME == model.RoleName &&
+            //    x.ROLE_STATUS == "Active");
 
-            if (assignedRole == null)
+            //if (assignedRole == null)
+            //{
+            //    return BadRequest(
+            //        "You are not authorized as {model.RoleName}"
+            //    );
+            //}
+            RoleMasterModel? assignedRole = null;
+
+            if (model.RoleName != "Requester")
             {
-                return BadRequest(
-                    "You are not authorized as {model.RoleName}"
-                );
+                assignedRole = _context.RoleMasterModels
+                .FirstOrDefault(x =>
+                    x.CustodianID == user.CustodianID &&
+                    x.ROLE_NAME == model.RoleName &&
+                    x.ROLE_STATUS == "Active");
+
+                if (assignedRole == null)
+                {
+                    return BadRequest(
+                        $"You are not authorized as {model.RoleName}"
+                    );
+                }
             }
             return Ok(new
             {
@@ -119,8 +136,8 @@ namespace NeemusAssetWebAPI.Controllers
                 PhoneNumber = user.InternalNumber,
                 ApproverID = user.ReportingStaffNo,
 
-                RoleID = assignedRole.ROLE_ID,
-                RoleName = assignedRole.ROLE_NAME
+                RoleID = assignedRole?.ROLE_ID ?? 0,
+                RoleName = model.RoleName
             });
         }
 
