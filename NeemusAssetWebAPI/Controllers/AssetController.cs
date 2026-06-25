@@ -216,5 +216,27 @@ namespace NeemusAssetWebAPI.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+
+        [HttpGet]
+        [Route("api/AssetDashboardCount")]
+        public IActionResult AssetDashboardCount()
+        {
+            var result = new
+            {
+                TotalAssets = _context.AssetModels.Count(),
+
+                ActiveAssets = _context.AssetModels
+                    .Count(x => x.Assetstatus == "Active"),
+
+                InactiveAssets = _context.AssetModels
+                    .Count(x => x.Assetstatus == "Inactive"),
+
+                ScrappedAssets = _context.AssetModels
+                    .Count(x => x.Assetstatus == "Scrapped" || x.Assetstatus == "Sold")
+            };
+
+            return Ok(result);
+        }
     }
 }

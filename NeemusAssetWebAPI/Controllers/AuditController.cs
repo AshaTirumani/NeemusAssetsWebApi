@@ -150,17 +150,21 @@
 using Microsoft.AspNetCore.Mvc;
 using NeemusAssetWebAPI.Data;
 using NeemusAssetWebAPI.Models;
-
+using Microsoft.EntityFrameworkCore;
 namespace NeemusAssetWebAPI.Controllers
 {
     [ApiController]
     public class AuditController : Controller
     {
         private readonly PostgreDBContext _context;
+        private readonly AssetSAPDBContext _assetSAPDBContext;
 
-        public AuditController(PostgreDBContext context)
+        public AuditController(
+            PostgreDBContext context,
+            AssetSAPDBContext assetSAPDBContext)
         {
             _context = context;
+            _assetSAPDBContext = assetSAPDBContext;
         }
 
         // GET API
@@ -172,7 +176,7 @@ namespace NeemusAssetWebAPI.Controllers
             return Ok(data);
         }
 
-        // INSERT API — new audit: Status = Started, AuditStatus = Active
+       
         [HttpPost]
         [Route("api/InsertAudit")]
         public IActionResult InsertAudit([FromBody] AuditMaster model)
@@ -310,6 +314,93 @@ namespace NeemusAssetWebAPI.Controllers
                 });
             }
         }
+
+
+        //[HttpGet]
+        //[Route("api/ViewAudits/{auditId}")]
+        //public async Task<IActionResult> ViewAudit(int auditId)
+        //{
+        //    try
+        //    {
+        //        // Get selected audit
+        //        var audit = await _context.AuditMasters
+        //            .FirstOrDefaultAsync(x => x.AuditID == auditId);
+
+        //        if (audit == null)
+        //        {
+        //            return Ok(new List<object>());
+        //        }
+
+        //        // Get location name
+        //        var location = await _context.LocationMasters
+        //            .FirstOrDefaultAsync(x => x.LocationID == audit.LocationID);
+
+        //        // Get assets
+        //        var assets = await _assetSAPDBContext.AssetModels.ToListAsync();
+
+        //        // Filter assets by audit location
+        //        var result = assets
+        //            .Where(x => x.Location == audit.LocationID.ToString())
+        //            .Select(x => new
+        //            {
+        //                assetId = x.AssetID,
+        //                mainAssetNumber = x.MainAssetNumber,
+        //                assetDesc = x.AssetDesc,
+        //                assetClass = x.AssetClass,
+        //                assetType = x.AssetType,
+        //                assetLocation = x.Location,
+        //                locationName = location != null ? location.Location : "",
+        //                auditName = audit.AuditName,
+        //                auditBy = audit.AuditBy,
+        //                auditedDate = audit.AuditDate,
+        //                assetStatus = x.Status
+        //            })
+        //            .ToList();
+
+        //        return Ok(result);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(ex.Message);
+        //    }
+        //}
+
+        [HttpGet]
+        [Route("api/ViewAudit/{auditId}")]
+        public async Task<IActionResult> ViewAudit()
+        {
+            try
+            {
+                var locations = await _context.LocationMasters.ToListAsync();
+
+                var assets = await _assetSAPDBContext.AssetModels.ToListAsync();
+
+                var result = (
+                    from asset in assets
+                    join loc in locations
+                    on asset.Location equals loc.LocationID.ToString()
+                    select new
+                    {
+                        asset.AssetID,
+                        asset.MainAssetNumber,
+                        asset.AssetDesc,
+                        asset.AssetClass,
+                        asset.AssetType,
+                        asset.Location,
+                        //LocationName = loc.LocationName
+                    }
+                ).ToList();
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+
+
     }
 }
 

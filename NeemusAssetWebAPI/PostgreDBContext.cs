@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using NeemusAssetWebAPI.Models;
 using static NeemusAssetWebAPI.Models.CustodianChangeRequestModel;
+using static NeemusAssetWebAPI.Models.DocumentMappingModel;
 
 
 namespace NeemusAssetWebAPI.Data
