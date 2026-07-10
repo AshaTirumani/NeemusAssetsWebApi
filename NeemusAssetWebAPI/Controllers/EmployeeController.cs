@@ -2,7 +2,6 @@
 using NeemusAssetWebAPI.Data;
 using NeemusAssetWebAPI.Helpers;
 using NeemusAssetWebAPI.Models;
-using NeemusAssetWebAPI.Helpers;
 namespace NeemusAssetWebAPI.Controllers
 {
     [ApiController]
@@ -127,7 +126,42 @@ namespace NeemusAssetWebAPI.Controllers
             return Ok();
         }
 
+        [HttpPost]
+        [Route("api/BulkInsertCustodian")]
+        public IActionResult BulkInsertCustodian([FromBody] List<EmployeeMaster> models)
+        {
+            try
+            {
+                foreach (var model in models)
+                {
+                    //model.FirstAcquisitionDate =
+                    //model.FirstAcquisitionDate?.ToLocalTime();
 
-       
+                    //model.AssetCapitalizationDate =
+                    //    model.AssetCapitalizationDate?.ToLocalTime();
+
+                    //model.WarrantyDate =
+                    //    model.WarrantyDate?.ToLocalTime();
+
+                    model.CreateDate = DateTime.Now;
+                    model.CustodianStatus = "Active";
+
+
+                    _context.EmployeeMasters.Add(model);
+                }
+
+                _context.SaveChanges();
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                //return Ok(0);
+                return BadRequest(ex.ToString());
+            }
+        }
+
+
+
     }
 }
