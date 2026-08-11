@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using NeemusAssetWebAPI.Data;
 using NeemusAssetWebAPI.Models;
 namespace NeemusAssetWebAPI.Controllers
@@ -16,23 +17,26 @@ namespace NeemusAssetWebAPI.Controllers
         [Route("api/ServiceTypeDetails")]
         public IActionResult GetServiceTypeDetails()
         {
-            var data = _context.ServiceTypeModels.ToList();
+            var data = _context.ServiceTypeModels
+                               .Where(x => x.Status == "Active")
+                               .ToList();
 
             return Ok(data);
         }
         //Add
+        // Add
         [HttpPost]
         [Route("api/InsertServiceTypeDetails")]
         public IActionResult InsertServiceTypeDetails([FromBody] ServiceTypeModel model)
         {
             try
             {
-                ServiceTypeModel obj = new ServiceTypeModel()
+                var obj = new ServiceTypeModel
                 {
                     ServiceTypeName = model.ServiceTypeName,
-                    Description=model.Description,
+                    Description = model.Description,
                     Status = "Active",
-                    CreatedDate = DateTime.Now,
+                    CreatedDate = DateTime.UtcNow   // Use UTC
                 };
 
                 _context.ServiceTypeModels.Add(obj);
@@ -43,6 +47,10 @@ namespace NeemusAssetWebAPI.Controllers
                     Message = "Service Type Inserted Successfully",
                     Data = obj
                 });
+            }
+            catch (DbUpdateException ex)
+            {
+                return BadRequest(ex.InnerException?.Message ?? ex.Message);
             }
             catch (Exception ex)
             {
@@ -56,11 +64,15 @@ namespace NeemusAssetWebAPI.Controllers
         public IActionResult UpdateServiceTypeDetails([FromBody] ServiceTypeModel model)
         {
             var data = _context.ServiceTypeModels
-              .FirstOrDefault(x => x.ServiceTypeID == model.ServiceTypeID);
+                .FirstOrDefault(x => x.ServiceTypeID == model.ServiceTypeID);
 
             if (data == null)
             {
-                return NotFound();
+                return NotFound(new
+                {
+                    Success = false,
+                    Message = "Service Type Not Found"
+                });
             }
 
             data.ServiceTypeName = model.ServiceTypeName;
@@ -69,8 +81,32 @@ namespace NeemusAssetWebAPI.Controllers
 
             _context.SaveChanges();
 
-            return Ok("Updated Successfully");
+            return Ok(new
+            {
+                Success = true,
+                Message = "Updated Successfully"
+            });
         }
 
+
+        // Soft Delete
+        [HttpDelete]
+        [Route("api/DeleteServiceTypeDetails/{id}")]
+        public IActionResult DeleteServiceTypeDetails(int id)
+        {
+            var data = _context.ServiceTypeModels
+                               .FirstOrDefault(x => x.ServiceTypeID == id);
+
+            if (data == null)
+            {
+                return NotFound("Service Type Not Found");
+            }
+
+            data.Status = "Inactive";
+
+            _context.SaveChanges();
+
+            return Ok("Service Type Inactivated Successfully");
+        }
     }
 }

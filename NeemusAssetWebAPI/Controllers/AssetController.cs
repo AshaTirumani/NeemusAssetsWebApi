@@ -9,7 +9,7 @@ namespace NeemusAssetWebAPI.Controllers
     {
         private readonly AssetSAPDBContext _context;
         private readonly PostgreDBContext _postgreDBContext;
-        public AssetController(AssetSAPDBContext context , PostgreDBContext postgreDBContext)
+        public AssetController(AssetSAPDBContext context, PostgreDBContext postgreDBContext)
         {
             _context = context;
             _postgreDBContext = postgreDBContext;
@@ -42,10 +42,10 @@ namespace NeemusAssetWebAPI.Controllers
                     AssetClass = model.AssetClass,
                     AssetType = model.AssetType,
                     AssetDesc = model.AssetDesc,
-                     SerialNumber=model.SerialNumber,
-                    Model=model.Model,
-                    Make=model.Make,
-                    YearofPurchase=model.YearofPurchase,
+                    SerialNumber = model.SerialNumber,
+                    Model = model.Model,
+                    Make = model.Make,
+                    YearofPurchase = model.YearofPurchase,
                     FirstAcquisitionDate = model.FirstAcquisitionDate,
                     AssetCapitalizationDate = model.AssetCapitalizationDate,
                     WarrantyDate = model.WarrantyDate,
@@ -58,14 +58,14 @@ namespace NeemusAssetWebAPI.Controllers
                     Unit = model.Unit,
                     CustodianID = model.CustodianID,
                     Location = model.Location,
-                    Cost=model.Cost,
-                    Component=model.Component,
-                    GRNumber=model.GRNumber,
-                    Indentor=model.Indentor,
+                    Cost = model.Cost,
+                    Component = model.Component,
+                    GRNumber = model.GRNumber,
+                    Indentor = model.Indentor,
                     //WarrantyDate = model.WarrantyDate.HasValue
                     //  ? DateTime.SpecifyKind(model.WarrantyDate.Value, DateTimeKind.Utc)
                     //: (DateTime?)null,
-                    Remarks=model.Remarks,
+                    Remarks = model.Remarks,
                     Status = model.Status,
                     Assetstatus = "Active",
                     CreationDate = System.DateTime.Today
@@ -237,6 +237,37 @@ namespace NeemusAssetWebAPI.Controllers
             };
 
             return Ok(result);
+        }
+
+
+        [HttpGet]
+        [Route("api/GetMyAssets/{assetClassID}/{custodianID}")]
+        public IActionResult GetMyAssets(string assetClassID, string custodianID)
+        {
+            try
+            {
+                Console.WriteLine($"Asset Class : {assetClassID}");
+                Console.WriteLine($"Custodian ID : {custodianID}");
+
+                var data = _context.AssetModels
+                    .Where(x =>
+                        x.Assetstatus == "Active" &&
+                        x.AssetClass == assetClassID &&
+                        x.CustodianID == custodianID)
+                    .Select(x => new
+                    {
+                        x.AssetID,
+                        x.MainAssetNumber,
+                        x.AssetDesc
+                    })
+                    .ToList();
+
+                return Ok(data);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.ToString());
+            }
         }
     }
 }

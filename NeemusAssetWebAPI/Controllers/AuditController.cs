@@ -154,7 +154,7 @@ using Microsoft.EntityFrameworkCore;
 namespace NeemusAssetWebAPI.Controllers
 {
     [ApiController]
-    public class AuditController : Controller
+    public class AuditController : ControllerBase
     {
         private readonly PostgreDBContext _context;
         private readonly AssetSAPDBContext _assetSAPDBContext;
@@ -167,16 +167,61 @@ namespace NeemusAssetWebAPI.Controllers
             _assetSAPDBContext = assetSAPDBContext;
         }
 
+        //// GET API
+        //[HttpGet]
+        //[Route("api/AuditDetails")]
+        //public IActionResult GetAudits()
+        //{
+        //    var data = _context.AuditMasters.ToList();
+        //    return Ok(data);
+        //}
         // GET API
         [HttpGet]
         [Route("api/AuditDetails")]
         public IActionResult GetAudits()
         {
-            var data = _context.AuditMasters.ToList();
-            return Ok(data);
+            try
+            {
+                var audits = _context.AuditMasters.ToList();
+                var auditDetails = _context.AuditDetailsModels.ToList();
+                var locations = _context.LocationMasters.ToList();
+                var assets = _assetSAPDBContext.AssetModels.ToList();
+
+                var result =
+                    from audit in audits
+                    join detail in auditDetails
+                        on audit.AuditID equals detail.AuditID
+                    join asset in assets
+                        on detail.AssetID equals asset.AssetID
+                    join location in locations
+                        on audit.LocationID equals location.LocationID
+                        into loc
+                    from location in loc.DefaultIfEmpty()
+                    select new
+                    {
+                        auditId = audit.AuditID,
+                        auditName = audit.AuditName,
+                        auditBy = detail.AuditBy ?? audit.AuditBy,
+                        mainAssetNumber = asset.MainAssetNumber,
+                        assetClass = asset.AssetClass,
+                        assetDescription = asset.AssetDesc,
+                        location = detail.Location,
+                        custodianID = detail.CustodianID,
+                        auditStatus = detail.AuditStatus,
+                        auditorComments = detail.Comments,
+                        auditedDate = detail.Date,
+                        status = detail.Status
+                    };
+
+                return Ok(result.OrderByDescending(x => x.auditedDate));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
-       
+
         [HttpPost]
         [Route("api/InsertAudit")]
         public IActionResult InsertAudit([FromBody] AuditMaster model)
@@ -273,7 +318,10 @@ namespace NeemusAssetWebAPI.Controllers
 
                 _context.SaveChanges();
 
-                return Ok("Updated Successfully");
+                return Ok(new
+                {
+                    message = "Updated Successfully"
+                });
             }
             catch (Exception ex)
             {
@@ -312,6 +360,32 @@ namespace NeemusAssetWebAPI.Controllers
                     Message = ex.Message,
                     InnerException = ex.InnerException?.Message
                 });
+            }
+        }
+
+        // GET API - list of audits for the "Select Audit" dropdown
+        [HttpGet]
+        [Route("api/ViewAudits")]
+        public IActionResult GetAuditsList()
+        {
+            try
+            {
+                var result = _context.AuditMasters
+                    .Where(x => x.Status != "InActive")
+                    .OrderByDescending(x => x.AuditDate)
+                    .Select(x => new
+                    {
+                        auditId = x.AuditID,
+                        auditName = x.AuditName,
+                        auditDate = x.AuditDate
+                    })
+                    .ToList();
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
             }
         }
 
@@ -364,34 +438,137 @@ namespace NeemusAssetWebAPI.Controllers
         //        return BadRequest(ex.Message);
         //    }
         //}
-
         [HttpGet]
-        [Route("api/ViewAudit/{auditId}")]
-        public async Task<IActionResult> ViewAudit()
+        [Route("api/AuditDetailsForEdit")]
+        public IActionResult GetAuditsForEdit()
         {
             try
             {
-                var locations = await _context.LocationMasters.ToListAsync();
+                var audits = _context.AuditMasters.ToList();
+                var auditDetails = _context.AuditDetailsModels.ToList();
+                var locations = _context.LocationMasters.ToList();
+                var assets = _assetSAPDBContext.AssetModels.ToList();
+
+                var result =
+                    from audit in audits
+                    join detail in auditDetails
+                        on audit.AuditID equals detail.AuditID
+                    join asset in assets
+                        on detail.AssetID equals asset.AssetID
+                    join location in locations
+                        on audit.LocationID equals location.LocationID
+                        into loc
+                    from location in loc.DefaultIfEmpty()
+                    select new
+                    {
+                        auditDetailsID = detail.AuditDetailsID,
+                        auditId = audit.AuditID,
+                        auditName = audit.AuditName,
+                        auditBy = detail.AuditBy ?? audit.AuditBy,
+                        mainAssetNumber = asset.MainAssetNumber,
+                        assetClass = asset.AssetClass,
+                        assetDescription = asset.AssetDesc,
+                        location = detail.Location,
+                        custodianID = detail.CustodianID,
+                        auditStatus = detail.AuditStatus,
+                        auditorComments = detail.Comments,
+                        auditedDate = detail.Date,
+                        status = detail.Status
+                    };
+
+                return Ok(result.OrderByDescending(x => x.auditedDate));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+
+        [HttpPut]
+        [Route("api/UpdateAuditDetails")]
+        public IActionResult UpdateAuditDetails([FromBody] AuditDetailsModel model)
+        {
+            try
+            {
+                if (model == null || model.AuditDetailsID <= 0)
+                    return BadRequest("Invalid Audit Details");
+
+                //var data = _context.AuditDetailsModels
+                //    .FirstOrDefault(x => x.AuditDetailsID == model.AuditDetailsID);
+                var data = _context.AuditDetailsModels
+    .FirstOrDefault(x => x.AuditDetailsID == model.AuditDetailsID);
+
+                if (data == null)
+                    return BadRequest("Audit Details Not Found");
+
+                data.AuditStatus = model.AuditStatus;
+                data.Comments = model.Comments;
+                data.Date = DateTime.Now;
+                data.Status = model.Status;
+                data.Location = model.Location;
+                data.CustodianID = model.CustodianID;
+                data.AuditBy = model.AuditBy;
+
+                _context.SaveChanges();
+
+                return Ok(new
+                {
+                    Message = "Updated Successfully"
+                });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new
+                {
+                    Message = ex.Message
+                });
+            }
+        }
+
+
+
+        [HttpGet]
+        [Route("api/ViewAudit/{auditId}")]
+        public async Task<IActionResult> ViewAudit(int auditId)
+        {
+            try
+            {
+                if (auditId <= 0)
+                    return BadRequest("Invalid Audit Id");
+
+                var audit = await _context.AuditMasters
+                    .FirstOrDefaultAsync(x => x.AuditID == auditId);
+
+                if (audit == null)
+                    return Ok(new List<object>());
+
+                var auditDetails = await _context.AuditDetailsModels
+                    .Where(x => x.AuditID == auditId)
+                    .ToListAsync();
 
                 var assets = await _assetSAPDBContext.AssetModels.ToListAsync();
 
-                var result = (
-                    from asset in assets
-                    join loc in locations
-                    on asset.Location equals loc.LocationID.ToString()
+                var result =
+                    from detail in auditDetails
+                    join asset in assets
+                        on detail.AssetID equals asset.AssetID
                     select new
                     {
-                        asset.AssetID,
-                        asset.MainAssetNumber,
-                        asset.AssetDesc,
-                        asset.AssetClass,
-                        asset.AssetType,
-                        asset.Location,
-                        //LocationName = loc.LocationName
-                    }
-                ).ToList();
+                        auditId = audit.AuditID,
+                        auditName = audit.AuditName,
+                        assetId = asset.AssetID,
+                        mainAssetNumber = asset.MainAssetNumber,
+                        assetDesc = asset.AssetDesc,
+                        assetClass = asset.AssetClass,
+                        location = detail.Location,
+                        auditBy = detail.AuditBy ?? audit.AuditBy,
+                        auditedDate = detail.Date,
+                        auditStatus = detail.AuditStatus,
+                        status = detail.Status
+                    };
 
-                return Ok(result);
+                return Ok(result.ToList());
             }
             catch (Exception ex)
             {
@@ -401,8 +578,233 @@ namespace NeemusAssetWebAPI.Controllers
 
 
 
+
+        [HttpPost]
+        [Route("api/InsertAuditDetails")]
+        public async Task<IActionResult> InsertAuditDetails([FromBody] AuditDetailInsertRequest model)
+        {
+            try
+            {
+                if (model == null)
+                    return BadRequest("Invalid audit detail data.");
+
+                var existing = await _context.AuditDetailsModels
+                    .FirstOrDefaultAsync(x =>
+                        x.AssetID == model.AssetId &&
+                        x.AuditID == model.AuditId);
+
+                if (existing != null)
+                {
+                    existing.Date = DateTime.SpecifyKind(model.AuditDate, DateTimeKind.Unspecified);
+                    existing.Location = model.UpdatedLocation;
+                    existing.CustodianID = model.ChangedCustodian;
+                    existing.Status = model.UpdatedStatus;
+                    existing.Comments = model.Comments;
+                    existing.AuditStatus = "Audited";
+                    existing.AuditBy = "Auditor";
+
+                    await _context.SaveChangesAsync();
+
+                    return Ok(new
+                    {
+                        Message = "Audit detail updated successfully",
+                        Data = existing
+                    });
+                }
+
+                int nextId = await _context.AuditDetailsModels.AnyAsync()
+                    ? await _context.AuditDetailsModels.MaxAsync(x => x.AuditDetailsID) + 1
+                    : 1;
+
+                var detail = new AuditDetailsModel
+                {
+                    AuditDetailsID = nextId,
+                    AssetID = model.AssetId,
+                    AuditID = model.AuditId,
+                    MainAssetNumber = model.MainAssetNumber,
+                    Location = model.UpdatedLocation,
+                    CustodianID = model.ChangedCustodian,
+                    Status = model.UpdatedStatus,
+                    Comments = model.Comments,
+                    Date = DateTime.SpecifyKind(model.AuditDate, DateTimeKind.Unspecified),
+                    AuditStatus = "Audited",
+                    AuditBy = "Auditor"
+                };
+
+                _context.AuditDetailsModels.Add(detail);
+
+                await _context.SaveChangesAsync();
+
+                return Ok(new
+                {
+                    Message = "Audit detail inserted successfully",
+                    Data = detail
+                });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new
+                {
+                    Message = ex.InnerException?.Message ?? ex.Message,
+                    Detail = ex.ToString()
+                });
+            }
+        }
+
+
+    
+
+    [HttpPost]
+        [Route("api/ApproveAuditAssets")]
+        public async Task<IActionResult> ApproveAuditAssets([FromBody] AuditApprovalRequest request)
+        {
+            try
+            {
+                if (request == null || request.AuditId <= 0 || request.Assets == null || !request.Assets.Any())
+                {
+                    return BadRequest("Invalid approval request data.");
+                }
+
+                var assetIds = request.Assets.Select(a => a.AssetId).ToList();
+
+                // 1. Update AuditMaster Remarks
+                var audit = await _context.AuditMasters.FirstOrDefaultAsync(x => x.AuditID == request.AuditId);
+                if (audit != null)
+                {
+                    audit.AdminRemarks = request.GlobalRemarks;
+                    if (request.Action == "Approve")
+                    {
+                        audit.Status = "Completed";
+                        audit.AuditStatus = "Inactive";
+                    }
+                }
+
+                // 2. Fetch and Update AuditDetailsModels
+                var auditDetailsList = await _context.AuditDetailsModels
+                    .Where(x => x.AuditID == request.AuditId && x.AssetID.HasValue && assetIds.Contains(x.AssetID.Value))
+                    .ToListAsync();
+
+                foreach (var detail in auditDetailsList)
+                {
+                    var reqAsset = request.Assets.FirstOrDefault(a => a.AssetId == detail.AssetID);
+                    detail.AuditStatus = request.Action == "Approve" ? "Approved" : "Rejected";
+                    detail.AdminRemarks = reqAsset != null && !string.IsNullOrWhiteSpace(reqAsset.Remarks)
+                                          ? reqAsset.Remarks
+                                          : request.GlobalRemarks;
+                }
+
+
+                // 3. Apply changes to AssetModel if Approved
+                if (request.Action == "Approve")
+                {
+                    var assetsToUpdate = await _assetSAPDBContext.AssetModels
+                        .Where(a => assetIds.Contains(a.AssetID))
+                        .ToListAsync();
+
+                    int nextHistoryId = (_context.AssetAuditHistories.Any()
+                        ? _context.AssetAuditHistories.Max(x => x.AuditHistoryID)
+                        : 0) + 1;
+
+                    foreach (var asset in assetsToUpdate)
+                    {
+                        var auditDetail = auditDetailsList.FirstOrDefault(d => d.AssetID == asset.AssetID);
+
+                        if (auditDetail != null)
+                        {
+                            // Save old values for history
+                            string oldLocation = asset.Location ?? string.Empty;
+                            string oldStatus = asset.Status ?? string.Empty;
+                            string oldCustodian = asset.CustodianID ?? string.Empty;
+
+                            // Update Asset Master
+                            if (!string.IsNullOrEmpty(auditDetail.Location))
+                                asset.Location = auditDetail.Location;
+
+                            if (!string.IsNullOrEmpty(auditDetail.Status))
+                                asset.Status = auditDetail.Status;
+
+                            if (!string.IsNullOrEmpty(auditDetail.CustodianID))
+                                asset.CustodianID = auditDetail.CustodianID;
+
+                            // Insert into AssetAuditHistory
+                            var history = new AssetAuditHistory
+                            {
+                                AuditID = auditDetail.AuditID,
+                                AssetID = auditDetail.AssetID,
+                                MainAssetNumber = auditDetail.MainAssetNumber,
+
+                                AssetLocation = oldLocation,
+                                AssetCustodian = oldCustodian,
+                                AssetStatus = oldStatus,
+
+                                LocationChangedTo = auditDetail.Location,
+                                CustodianChangedTo = auditDetail.CustodianID,
+                                StatusChangedTo = auditDetail.Status,
+
+                                AuditBy = auditDetail.AuditBy,
+                                AuditorRemarks = auditDetail.Comments,
+                                AuditedDate = auditDetail.Date,
+
+                                ApprovedBy = "Admin", // Replace with logged-in user if available
+                                ApproverRemarks = request.GlobalRemarks,
+                                ApprovedDate = DateTime.Now,
+
+                                AuditDetailsID = auditDetail.AuditDetailsID,
+                                Status = "Approved",
+                                AdminDate = DateTime.Now
+                            };
+                            // Generate AuditHistoryID manually using the pre-calculated and incremented counter
+                            history.AuditHistoryID = nextHistoryId++;
+
+                            _context.AssetAuditHistories.Add(history);
+                        }
+                    }
+                }
+
+                await _context.SaveChangesAsync();
+                await _assetSAPDBContext.SaveChangesAsync();
+
+                return Ok(new { Message = $"Assets successfully {request.Action.ToLower()}ed." });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
     }
 }
+
+//public class AssetApprovalData
+//{
+//    public int AssetId { get; set; }
+//    public string Remarks { get; set; }
+//}
+
+//public class AuditApprovalRequest
+//{
+//    public int AuditId { get; set; }
+//    public List<AssetApprovalData> Assets { get; set; }
+//    public string GlobalRemarks { get; set; }
+//    public string Action { get; set; } // "Approve" or "Reject"
+//}
+
+//public class AuditDetailInsertRequest
+//{
+//    public int AssetId { get; set; }
+//    public int AuditId { get; set; }
+//    public string? AuditName { get; set; }
+//    public string? Location { get; set; }
+//    public string? AssetClass { get; set; }
+//    public string? MainAssetNumber { get; set; }
+//    public string? UpdatedLocation { get; set; }
+//    public string? ChangedCustodian { get; set; }
+//    public string? UpdatedStatus { get; set; }
+//    public string? Comments { get; set; }
+//    public DateTime AuditDate { get; set; }
+//}
+
+
 
 
 

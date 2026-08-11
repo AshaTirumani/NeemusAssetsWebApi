@@ -1,4 +1,4 @@
-﻿
+
 using Microsoft.EntityFrameworkCore;
 using NeemusAssetWebAPI.Models;
 using static NeemusAssetWebAPI.Models.CustodianChangeRequestModel;
@@ -33,7 +33,14 @@ namespace NeemusAssetWebAPI.Data
         public DbSet<SAPUpdateLogInfoModel> SAPUpdateLogInfos { get; set; }
         public DbSet<AssetDocumentMapping> AssetDocumentMappings { get; set; }
         public DbSet<AuditDetailsModel> AuditDetailsModels { get; set; }
-        public DbSet<GenerateQRModel> GenerateQRModels { get; set; }
+        //public DbSet<GenerateQRModel> GenerateQRModels { get; set; }
+        public DbSet<AssetAuditHistory> AssetAuditHistories { get; set; }
+        public DbSet<ComplaintRegistration> ComplaintRegistrations { get; set; }
+      
+
+        public DbSet<ServiceTypeApproverModel> ServiceTypeApproverModels { get; set; }
+        public DbSet<ServiceTypeEngineerModel> ServiceTypeEngineerModels { get; set; }
+        public DbSet<ComplaintTransaction> ComplaintTransactions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -52,6 +59,20 @@ namespace NeemusAssetWebAPI.Data
              .HasColumnType("timestamp without time zone");
             modelBuilder.Entity<RoleMasterModel>()
                .HasKey(x => x.ROLE_ID);
+
+            modelBuilder.Entity<AuditDetailsModel>()
+               .Property(x => x.Date)
+               .HasColumnType("timestamp without time zone");
+
+            modelBuilder.Entity<AssetAuditHistory>()
+               .Property(x => x.AuditedDate)
+               .HasColumnType("timestamp without time zone");
+            modelBuilder.Entity<AssetAuditHistory>()
+               .Property(x => x.ApprovedDate)
+               .HasColumnType("timestamp without time zone");
+            modelBuilder.Entity<AssetAuditHistory>()
+               .Property(x => x.AdminDate)
+               .HasColumnType("timestamp without time zone");
         }
        
 

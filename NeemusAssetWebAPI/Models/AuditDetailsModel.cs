@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 namespace NeemusAssetWebAPI.Models
@@ -7,6 +7,7 @@ namespace NeemusAssetWebAPI.Models
     public class AuditDetailsModel
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int AuditDetailsID { get; set; }
         public string? MainAssetNumber { get; set; }
         public string? AuditStatus { get; set; }

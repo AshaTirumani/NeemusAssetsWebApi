@@ -1,12 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+
 namespace NeemusAssetWebAPI.Models
 {
     [Table("AssetMaster")]
-    public class AssetModel
+    public class ErpAssetModel
     {
         [Key]
         public int SLNO { get; set; }
+
         public int AssetID { get; set; }
         public string? MainAssetNumber { get; set; }
         public string? AssetSubNumber { get; set; }
@@ -32,12 +34,10 @@ namespace NeemusAssetWebAPI.Models
         public DateTime? WarrantyDate { get; set; }
         public string? Remarks { get; set; }
         public string? Status { get; set; }
+
+        // Keep the same property name as AssetModel
         public string? Assetstatus { get; set; }
 
         public DateTime? CreationDate { get; set; }
-        public string? RFIDCardNumber { get; set; }
-
-        public DateTime? RFIDMAPDATE { get; set; }
-
     }
 }
