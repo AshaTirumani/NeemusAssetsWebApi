@@ -1,30 +1,38 @@
 using Microsoft.EntityFrameworkCore;
 using NeemusAssetWebAPI;
 using NeemusAssetWebAPI.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
+// Add services to the container
 builder.Services.AddControllers();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+
 builder.Services.AddOpenApi();
 
-// ✅ REGISTER DB CONTEXT (THIS FIXES YOUR ERROR)
-//builder.Services.AddDbContext<AppDbContext>(options =>
-//    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+// ================= DATABASE CONTEXTS =================
 
+// Asset AMS Database
 builder.Services.AddDbContext<PostgreDBContext>(options =>
     options.UseNpgsql(
         builder.Configuration.GetConnectionString("AssetAMSConnection")));
 
+// Asset Common Database
 builder.Services.AddDbContext<AssetCommonDBContext>(options =>
     options.UseNpgsql(
         builder.Configuration.GetConnectionString("AssetCommonConnection")));
 
+// Asset SAP Database
 builder.Services.AddDbContext<AssetSAPDBContext>(options =>
     options.UseNpgsql(
         builder.Configuration.GetConnectionString("AssetSAPCommonConnection")));
-// ADD CORS
+
+// ERP Database
+builder.Services.AddDbContext<ERPDBContext>(options =>
+    options.UseNpgsql(
+        builder.Configuration.GetConnectionString("AssetERPCommonConnection")));
+
+// ================= CORS =================
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll",
@@ -36,17 +44,17 @@ builder.Services.AddCors(options =>
         });
 });
 
-
 var app = builder.Build();
+
 app.UseStaticFiles();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
 
 app.UseHttpsRedirection();
+
 app.UseCors("AllowAll");
 
 app.UseAuthorization();
