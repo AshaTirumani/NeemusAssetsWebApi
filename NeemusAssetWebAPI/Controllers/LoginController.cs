@@ -111,13 +111,27 @@ namespace NeemusAssetWebAPI.Controllers
             //}
             RoleMasterModel? assignedRole = null;
 
-            if (model.RoleName != "Requester")
+            if (model.RoleName == "Engineer")
+            {
+                var engineerAssignment = _context.ServiceTypeEngineerModels
+                    .FirstOrDefault(x =>
+                        x.Custodianid == Convert.ToInt32(user.CustodianID) &&
+                        x.Status == "Active");
+
+                if (engineerAssignment == null)
+                {
+                    return BadRequest(
+                        $"You are not authorized as {model.RoleName}"
+                    );
+                }
+            }
+            else if (model.RoleName != "Requester")
             {
                 assignedRole = _context.RoleMasterModels
-                .FirstOrDefault(x =>
-                    x.CustodianID == user.CustodianID &&
-                    x.ROLE_NAME == model.RoleName &&
-                    x.ROLE_STATUS == "Active");
+                    .FirstOrDefault(x =>
+                        x.CustodianID == user.CustodianID &&
+                        x.ROLE_NAME == model.RoleName &&
+                        x.ROLE_STATUS == "Active");
 
                 if (assignedRole == null)
                 {

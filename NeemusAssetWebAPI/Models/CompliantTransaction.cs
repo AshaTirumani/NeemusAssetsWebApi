@@ -8,7 +8,7 @@ namespace NeemusAssetWebAPI.Models
     {
         [Key]
         [Column("ComplaintTransactionID")]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ComplaintTransactionID { get; set; }
 
         [Column("ComplaintID")]
@@ -56,4 +56,22 @@ namespace NeemusAssetWebAPI.Models
         [Column("planofActionDate")]
         public DateTime? PlanOfActionDate { get; set; }
     }
+}
+public class SolveTicketRequest
+{
+    public string? Status { get; set; }
+
+    public string? Comments { get; set; }
+}
+public class UserTicketActionRequest
+{
+    public string? Status { get; set; }
+
+    public string? Comments { get; set; }
+}
+public class AssignTicketRequest
+{
+    public int AssignedTo { get; set; }
+
+    public string? ApproverComments { get; set; }
 }
